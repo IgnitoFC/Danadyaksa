@@ -1,0 +1,652 @@
+index.html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danadyaksa - Platform Bimbel Canggih Kelas 11 IPS</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col antialiased">
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="bg-slate-800/90 backdrop-blur border-b border-slate-700/60 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-black text-xl text-white shadow-lg shadow-blue-500/20">
+                        D
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-200">
+                            DANADYAKSA
+                        </span>
+                        <span class="block text-[10px] font-semibold text-blue-400 tracking-wider uppercase">Bimbel Kelas 11 IPS</span>
+                    </div>
+                </div>
+
+                <!-- Navigation Status & Auth controls -->
+                <div class="flex items-center space-x-4">
+                    <div id="userInfo" class="hidden flex items-center space-x-3 bg-slate-900/60 border border-slate-700/80 px-3 py-1.5 rounded-lg text-sm">
+                        <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+                        <span id="displayUser" class="font-medium text-slate-200">User</span>
+                        <span id="displayRole" class="px-2 py-0.5 text-[10px] uppercase tracking-wider font-bold rounded bg-blue-500/20 text-blue-300 border border-blue-500/30">Role</span>
+                    </div>
+                    <button id="logoutBtn" onclick="logout()" class="hidden text-sm bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 px-3 py-1.5 rounded-lg font-medium transition">
+                        Keluar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- ==================== VIEW 1: AUTHENTICATION / LOGIN ==================== -->
+        <section id="view-login" class="tab-content active my-12">
+            <div class="max-w-md mx-auto bg-slate-800 border border-slate-700/80 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+                <div class="absolute -right-10 -top-10 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-white">Selamat Datang</h2>
+                    <p class="text-sm text-slate-400 mt-1">Portal Pembelajaran & Evaluasi Kelas 11 IPS</p>
+                </div>
+
+                <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-5">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-slate-400 mb-2">Role Akses</label>
+                        <select id="loginRole" onchange="toggleTokenInput()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-slate-200 focus:outline-none focus:border-blue-500 text-sm">
+                            <option value="pelajar">Pelajar (Siswa Kelas 11 IPS)</option>
+                            <option value="admin">Admin / Tentor Danadyaksa</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-slate-400 mb-2">Nama Pengguna / ID</label>
+                        <input type="text" id="loginUser" required placeholder="Masukkan nama kamu" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-slate-200 focus:outline-none focus:border-blue-500 text-sm">
+                    </div>
+
+                    <div id="tokenField">
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="block text-xs font-semibold uppercase text-slate-400">Token Akses Harian</label>
+                            <span class="text-[10px] text-blue-400">Reset Setiap 00:00 WIB</span>
+                        </div>
+                        <input type="text" id="loginToken" placeholder="Contoh: DNY-IPS11" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-slate-200 focus:outline-none focus:border-blue-500 font-mono tracking-widest uppercase text-sm">
+                        <p class="text-[11px] text-slate-500 mt-1">Dapatkan token harian dari admin/tentor bimbel.</p>
+                    </div>
+
+                    <div id="deviceNotice" class="p-3 bg-blue-950/40 border border-blue-800/50 rounded-lg text-xs text-blue-300 flex items-start space-x-2">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-blue-400 shrink-0 mt-0.5"></i>
+                        <span>Sistem Keamanan Device Binding aktif. Token kamu terikat otomatis pada perangkat ini.</span>
+                    </div>
+
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-lg shadow-lg shadow-blue-600/30 transition text-sm flex items-center justify-center space-x-2">
+                        <span>Masuk ke Dashboard</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ==================== VIEW 2: DASHBOARD PELAJAR ==================== -->
+        <section id="view-pelajar" class="tab-content space-y-8">
+            <!-- Header Pelajar -->
+            <div class="bg-gradient-to-r from-slate-800 to-slate-800/60 border border-slate-700/80 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div>
+                    <div class="inline-flex items-center space-x-2 bg-blue-500/10 border border-blue-500/20 px-3 py-1 rounded-full text-xs text-blue-400 font-medium mb-3">
+                        <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+                        <span>Kurikulum Khusus Kelas 11 IPS</span>
+                    </div>
+                    <h1 class="text-2xl md:text-3xl font-extrabold text-white">Selamat Belajar, <span id="studentName">Siswa</span>!</h1>
+                    <p class="text-slate-400 text-sm mt-1">Pilih mata pelajaran atau akses drilling latihan soal IPS hari ini.</p>
+                </div>
+                <div class="bg-slate-900/80 border border-slate-700/80 p-4 rounded-xl flex items-center space-x-4">
+                    <div class="p-3 bg-indigo-500/10 text-indigo-400 rounded-lg">
+                        <i data-lucide="award" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-slate-400">Total Latihan Tuntas</div>
+                        <div id="completedQuizzes" class="text-xl font-bold text-white">0 Set Soal</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Navigasi Pelajar -->
+            <div class="flex border-b border-slate-800 space-x-6 text-sm font-medium">
+                <button onclick="switchStudentSubTab('drilling')" id="subtab-btn-drilling" class="pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2">
+                    <i data-lucide="target" class="w-4 h-4"></i>
+                    <span>Drilling Soal IPS</span>
+                </button>
+                <button onclick="switchStudentSubTab('modul')" id="subtab-btn-modul" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2">
+                    <i data-lucide="file-text" class="w-4 h-4"></i>
+                    <span>Modul Pembelajaran</span>
+                </button>
+                <button onclick="switchStudentSubTab('ai')" id="subtab-btn-ai" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2">
+                    <i data-lucide="bot" class="w-4 h-4"></i>
+                    <span>Danadyaksa AI Tutor</span>
+                </button>
+            </div>
+
+            <!-- SUBTAB 1: DRILLING SOAL -->
+            <div id="student-subtab-drilling" class="space-y-6">
+                <!-- Quiz Subject Filter -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+                    <button onclick="filterQuizSubject('Semua')" class="p-3 bg-slate-800 border border-slate-700 hover:border-blue-500 rounded-xl text-center text-xs font-semibold text-slate-200 transition">Semua Mapel</button>
+                    <button onclick="filterQuizSubject('Ekonomi')" class="p-3 bg-slate-800 border border-slate-700 hover:border-blue-500 rounded-xl text-center text-xs font-semibold text-slate-200 transition">Ekonomi</button>
+                    <button onclick="filterQuizSubject('Sosiologi')" class="p-3 bg-slate-800 border border-slate-700 hover:border-blue-500 rounded-xl text-center text-xs font-semibold text-slate-200 transition">Sosiologi</button>
+                    <button onclick="filterQuizSubject('Geografi')" class="p-3 bg-slate-800 border border-slate-700 hover:border-blue-500 rounded-xl text-center text-xs font-semibold text-slate-200 transition">Geografi</button>
+                    <button onclick="filterQuizSubject('Sejarah')" class="p-3 bg-slate-800 border border-slate-700 hover:border-blue-500 rounded-xl text-center text-xs font-semibold text-slate-200 transition">Sejarah</button>
+                    <button onclick="filterQuizSubject('B.Indo/Inggris')" class="p-3 bg-slate-800 border border-slate-700 hover:border-blue-500 rounded-xl text-center text-xs font-semibold text-slate-200 transition">B.Indo / Inggris</button>
+                </div>
+
+                <!-- Active Quiz Engine Box -->
+                <div class="bg-slate-800 border border-slate-700/80 rounded-2xl p-6 md:p-8">
+                    <div id="quizHeader" class="flex justify-between items-center mb-6 border-b border-slate-700 pb-4">
+                        <div>
+                            <span id="quizSubjectTag" class="px-2.5 py-1 text-xs font-bold rounded bg-blue-500/20 text-blue-400 border border-blue-500/30">Ekonomi Kelas 11</span>
+                            <h3 id="quizTitle" class="text-lg font-bold text-white mt-2">Drilling Konsep Pendapatan Nasional</h3>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs text-slate-400 block">Status Latihan</span>
+                            <span id="quizProgress" class="text-sm font-semibold text-blue-400">Soal 1 dari 3</span>
+                        </div>
+                    </div>
+
+                    <!-- Question & Options area -->
+                    <div id="quizContainer">
+                        <p id="questionText" class="text-slate-200 text-base leading-relaxed mb-6">
+                            Komponen manakah yang diperhitungkan dalam penghitungan Pendapatan Nasional menggunakan pendekatan pengeluaran?
+                        </p>
+                        <div id="optionsContainer" class="space-y-3">
+                            <!-- Options rendered via JS -->
+                        </div>
+                        <div id="explanationBox" class="hidden mt-6 p-4 rounded-xl bg-slate-900 border border-slate-700 text-sm">
+                            <h4 class="font-bold text-emerald-400 mb-1">Pembahasan:</h4>
+                            <p id="explanationText" class="text-slate-300 leading-relaxed"></p>
+                        </div>
+                        <div class="mt-6 flex justify-end space-x-3">
+                            <button id="submitAnswerBtn" onclick="checkAnswer()" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-2.5 rounded-lg text-sm transition">Jawab</button>
+                            <button id="nextQuestionBtn" onclick="nextQuestion()" class="hidden bg-slate-700 hover:bg-slate-600 text-white font-semibold px-6 py-2.5 rounded-lg text-sm transition">Soal Berikutnya</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUBTAB 2: MODUL PEMBELAJARAN -->
+            <div id="student-subtab-modul" class="tab-content space-y-4">
+                <h3 class="text-lg font-bold text-white">Katalog Modul & Materi Rangkuman Kelas 11 IPS</h3>
+                <div id="modulesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Default Modules -->
+                    <div class="bg-slate-800 border border-slate-700 p-5 rounded-xl flex flex-col justify-between space-y-4">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded">Sosiologi</span>
+                            <h4 class="font-bold text-white mt-2">Kelompok Sosial & Harmoni Masyarakat</h4>
+                            <p class="text-xs text-slate-400 mt-1">Rangkuman dasar pembentukan kelompok sosial dan dinamika interaksi sosial.</p>
+                        </div>
+                        <button onclick="alert('Membuka modul PDF Sosiologi...')" class="w-full bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-semibold py-2 rounded-lg transition flex items-center justify-center space-x-1">
+                            <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                            <span>Baca / Unduh Modul</span>
+                        </button>
+                    </div>
+                    <div class="bg-slate-800 border border-slate-700 p-5 rounded-xl flex flex-col justify-between space-y-4">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">Geografi</span>
+                            <h4 class="font-bold text-white mt-2">Posisi Strategis Indonesia & SDA</h4>
+                            <p class="text-xs text-slate-400 mt-1">Peta poros maritim dunia serta klasifikasi sumber daya alam Indonesia.</p>
+                        </div>
+                        <button onclick="alert('Membuka modul PDF Geografi...')" class="w-full bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-semibold py-2 rounded-lg transition flex items-center justify-center space-x-1">
+                            <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                            <span>Baca / Unduh Modul</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUBTAB 3: AI TUTOR -->
+            <div id="student-subtab-ai" class="tab-content">
+                <div class="bg-slate-800 border border-slate-700 rounded-2xl h-[500px] flex flex-col">
+                    <div class="p-4 border-b border-slate-700 flex items-center space-x-3 bg-slate-800/80 rounded-t-2xl">
+                        <div class="w-8 h-8 rounded-lg bg-indigo-600/30 text-indigo-400 border border-indigo-500/30 flex items-center justify-center">
+                            <i data-lucide="bot" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-white">Danadyaksa AI Study Buddy</h4>
+                            <p class="text-[11px] text-slate-400">Siap bantu jawab pertanyaan materi Ekonomi, Sosiologi, Geografi & Sejarah K-11</p>
+                        </div>
+                    </div>
+                    <!-- Chat box history -->
+                    <div id="chatHistory" class="flex-1 p-4 overflow-y-auto space-y-3 text-sm">
+                        <div class="bg-slate-900 border border-slate-700/60 p-3 rounded-xl max-w-[85%] text-slate-300">
+                            Halo! Saya Tutor AI Danadyaksa. Ada konsep atau soal materi IPS Kelas 11 yang ingin kamu tanyakan atau minta jelaskan?
+                        </div>
+                    </div>
+                    <!-- Chat input -->
+                    <div class="p-3 border-t border-slate-700 bg-slate-900/60 rounded-b-2xl">
+                        <form onsubmit="handleAIChat(event)" class="flex space-x-2">
+                            <input type="text" id="aiInput" placeholder="Tanyakan rumusan Ekonomi atau konsep Sosiologi..." class="flex-1 bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
+                            <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2.5 rounded-lg font-semibold text-sm transition">Kirim</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== VIEW 3: DASHBOARD ADMIN ==================== -->
+        <section id="view-admin" class="tab-content space-y-8">
+            <!-- Header Admin -->
+            <div class="bg-slate-800 border border-slate-700 p-6 md:p-8 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <span class="px-2.5 py-1 text-xs font-bold rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">Panel Pengelola / Tentor</span>
+                    <h1 class="text-2xl font-bold text-white mt-2">Manajemen Platform Danadyaksa</h1>
+                    <p class="text-sm text-slate-400">Atur Token Akses Harian, Impor Modul Bimbel, dan Generasi Soal AI.</p>
+                </div>
+            </div>
+
+            <!-- Tab Navigasi Admin -->
+            <div class="flex border-b border-slate-800 space-x-6 text-sm font-medium">
+                <button onclick="switchAdminSubTab('token')" id="adm-tab-btn-token" class="pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2">
+                    <i data-lucide="key" class="w-4 h-4"></i>
+                    <span>Atur Token Harian</span>
+                </button>
+                <button onclick="switchAdminSubTab('ai-gen')" id="adm-tab-btn-ai-gen" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    <span>AI Question Generator</span>
+                </button>
+                <button onclick="switchAdminSubTab('upload')" id="adm-tab-btn-upload" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2">
+                    <i data-lucide="upload" class="w-4 h-4"></i>
+                    <span>Impor Modul Bimbel</span>
+                </button>
+            </div>
+
+            <!-- SUBTAB ADMIN 1: MANAGEMENT TOKEN HARIAN -->
+            <div id="admin-subtab-token" class="space-y-6">
+                <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 max-w-xl space-y-4">
+                    <h3 class="font-bold text-white text-base">Atur Token Akses Hari Ini</h3>
+                    <p class="text-xs text-slate-400">Token ini digunakan oleh seluruh siswa Kelas 11 IPS untuk mengakses platform hari ini.</p>
+                    
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 uppercase mb-2">Token Aktif Saat Ini</label>
+                        <div class="flex space-x-2">
+                            <input type="text" id="activeTokenInput" value="DNY-IPS11" class="flex-1 bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 font-mono text-blue-400 font-bold uppercase text-sm">
+                            <button onclick="saveActiveToken()" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-4 py-2.5 rounded-lg text-sm transition">Perbarui Token</button>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-700">
+                        <h4 class="text-xs font-bold text-slate-300 mb-2">Keamanan Terikat Perangkat (Device Lock Log)</h4>
+                        <div class="text-xs bg-slate-900 p-3 rounded-lg border border-slate-700 font-mono text-slate-400 space-y-1">
+                            <div>[SYSTEM] Device Lock Status: ACTIVE</div>
+                            <div>[LOG] Token "DNY-IPS11" terikat pada ID Perangkat Aktif.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUBTAB ADMIN 2: AI QUESTION GENERATOR -->
+            <div id="admin-subtab-ai-gen" class="tab-content space-y-6">
+                <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 max-w-2xl space-y-4">
+                    <h3 class="font-bold text-white text-base">Generator Soal Otomatis Berbasis AI</h3>
+                    <p class="text-xs text-slate-400">Pilih mata pelajaran Kelas 11 IPS dan topik untuk membuat soal HOTS secara instan.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-2">Mata Pelajaran</label>
+                            <select id="genSubject" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-xs text-slate-200">
+                                <option value="Ekonomi">Ekonomi</option>
+                                <option value="Sosiologi">Sosiologi</option>
+                                <option value="Geografi">Geografi</option>
+                                <option value="Sejarah">Sejarah</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 mb-2">Topik Bahasan</label>
+                            <input type="text" id="genTopic" placeholder="Contoh: APBN & APBD" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-xs text-slate-200">
+                        </div>
+                    </div>
+
+                    <button onclick="generateQuestionAI()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 rounded-lg text-xs transition flex items-center justify-center space-x-2">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i>
+                        <span>Generate & Tambahkan ke Bank Soal</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- SUBTAB ADMIN 3: UPLOAD MODUL -->
+            <div id="admin-subtab-upload" class="tab-content space-y-6">
+                <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 max-w-2xl space-y-4">
+                    <h3 class="font-bold text-white text-base">Impor Modul Bimbel / Materi IPS</h3>
+                    
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-2">Mata Pelajaran</label>
+                        <select id="modSubject" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-xs text-slate-200">
+                            <option value="Ekonomi">Ekonomi</option>
+                            <option value="Sosiologi">Sosiologi</option>
+                            <option value="Geografi">Geografi</option>
+                            <option value="Sejarah">Sejarah</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-2">Judul Modul</label>
+                        <input type="text" id="modTitle" placeholder="Contoh: Rangkuman Bab 2 Sosiologi" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-xs text-slate-200">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-2">Deskripsi Ringkas</label>
+                        <textarea id="modDesc" rows="3" placeholder="Penjelasan singkat modul..." class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-xs text-slate-200"></textarea>
+                    </div>
+
+                    <button onclick="uploadModule()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3 rounded-lg text-xs transition">Terbitkan Modul ke Pelajar</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 border-t border-slate-800/80 py-6 text-center text-xs text-slate-500 mt-auto">
+        <p>&copy; 2026 Danadyaksa Learning System - Khusus Kelas 11 SMA IPS</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // DATA STATE APPLIKASI
+        let activeToken = "DNY-IPS11";
+        let currentUser = null;
+        let currentRole = null;
+        let activeQuizIndex = 0;
+
+        let quizData = [
+            {
+                subject: "Ekonomi",
+                question: "Komponen manakah yang secara langsung diperhitungkan dalam penghitungan Pendapatan Nasional menggunakan pendekatan Pengeluaran (Expenditure Approach)?",
+                options: [
+                    "Upah, Sewa, Bunga, dan Laba",
+                    "Konsumsi Rumah Tangga, Investasi, Pengeluaran Pemerintah, dan Ekspor Nett",
+                    "Nilai Tambah Sektor Pertanian dan Manufaktur",
+                    "Pajak Tidak Langsung dan Subsidi"
+                ],
+                correct: 1,
+                explanation: "Pendapatan nasional pendekatan pengeluaran dihitung dari penjumlahan Konsumsi (C) + Investasi (I) + Pengeluaran Pemerintah (G) + (Ekspor - Impor)."
+            },
+            {
+                subject: "Sosiologi",
+                question: "Suatu kelompok sosial yang terbentuk atas dasar ikatan batin yang murni, alami, dan kekal disebut oleh Ferdinand Tönnies sebagai...",
+                options: [
+                    "Gesellschaft (Patembayan)",
+                    "Gemeinschaft (Paguyuban)",
+                    "In-Group",
+                    "Reference Group"
+                ],
+                correct: 1,
+                explanation: "Gemeinschaft (Paguyuban) adalah bentuk kehidupan bersama di mana anggota-anggotanya diikat oleh hubungan batin yang murni, bersifat alamiah dan kekal (contoh: keluarga, ikatan kerabat)."
+            }
+        ];
+
+        // INITIALIZATION
+        document.addEventListener("DOMContentLoaded", () => {
+            lucide.createIcons();
+            loadQuizQuestion(0);
+        });
+
+        // AUTHENTICATION LOGIC
+        function toggleTokenInput() {
+            const role = document.getElementById("loginRole").value;
+            const tokenField = document.getElementById("tokenField");
+            if (role === "admin") {
+                tokenField.classList.add("hidden");
+            } else {
+                tokenField.classList.remove("hidden");
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const role = document.getElementById("loginRole").value;
+            const user = document.getElementById("loginUser").value.trim();
+            const token = document.getElementById("loginToken").value.trim().toUpperCase();
+
+            if (!user) {
+                alert("Harap masukkan nama kamu!");
+                return;
+            }
+
+            if (role === "pelajar" && token !== activeToken) {
+                alert("Token Harian salah atau sudah kedaluwarsa! Minta token terbaru pada Admin Danadyaksa.");
+                return;
+            }
+
+            currentUser = user;
+            currentRole = role;
+
+            document.getElementById("displayUser").innerText = user;
+            document.getElementById("displayRole").innerText = role;
+            document.getElementById("userInfo").classList.remove("hidden");
+            document.getElementById("logoutBtn").classList.remove("hidden");
+
+            // Switch View
+            document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
+            
+            if (role === "admin") {
+                document.getElementById("view-admin").classList.add("active");
+            } else {
+                document.getElementById("studentName").innerText = user;
+                document.getElementById("view-pelajar").classList.add("active");
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            currentRole = null;
+            document.getElementById("userInfo").classList.add("hidden");
+            document.getElementById("logoutBtn").classList.add("hidden");
+
+            document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
+            document.getElementById("view-login").classList.add("active");
+        }
+
+        // SUBTAB NAVIGATION (STUDENT)
+        function switchStudentSubTab(tab) {
+            document.getElementById("student-subtab-drilling").classList.add("hidden");
+            document.getElementById("student-subtab-modul").classList.add("hidden");
+            document.getElementById("student-subtab-ai").classList.add("hidden");
+
+            document.getElementById("subtab-btn-drilling").className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2";
+            document.getElementById("subtab-btn-modul").className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2";
+            document.getElementById("subtab-btn-ai").className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2";
+
+            if (tab === 'drilling') {
+                document.getElementById("student-subtab-drilling").classList.remove("hidden");
+                document.getElementById("subtab-btn-drilling").className = "pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2 font-bold";
+            } else if (tab === 'modul') {
+                document.getElementById("student-subtab-modul").classList.remove("hidden");
+                document.getElementById("subtab-btn-modul").className = "pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2 font-bold";
+            } else if (tab === 'ai') {
+                document.getElementById("student-subtab-ai").classList.remove("hidden");
+                document.getElementById("subtab-btn-ai").className = "pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2 font-bold";
+            }
+        }
+
+        // SUBTAB NAVIGATION (ADMIN)
+        function switchAdminSubTab(tab) {
+            document.getElementById("admin-subtab-token").classList.add("hidden");
+            document.getElementById("admin-subtab-ai-gen").classList.add("hidden");
+            document.getElementById("admin-subtab-upload").classList.add("hidden");
+
+            document.getElementById("adm-tab-btn-token").className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2";
+            document.getElementById("adm-tab-btn-ai-gen").className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2";
+            document.getElementById("adm-tab-btn-upload").className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2";
+
+            if (tab === 'token') {
+                document.getElementById("admin-subtab-token").classList.remove("hidden");
+                document.getElementById("adm-tab-btn-token").className = "pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2 font-bold";
+            } else if (tab === 'ai-gen') {
+                document.getElementById("admin-subtab-ai-gen").classList.remove("hidden");
+                document.getElementById("adm-tab-btn-ai-gen").className = "pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2 font-bold";
+            } else if (tab === 'upload') {
+                document.getElementById("admin-subtab-upload").classList.remove("hidden");
+                document.getElementById("adm-tab-btn-upload").className = "pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2 font-bold";
+            }
+        }
+
+        // QUIZ DRILLING ENGINE
+        function loadQuizQuestion(index) {
+            if (index >= quizData.length) index = 0;
+            activeQuizIndex = index;
+            const q = quizData[index];
+
+            document.getElementById("quizSubjectTag").innerText = q.subject + " Kelas 11";
+            document.getElementById("quizProgress").innerText = `Soal ${index + 1} dari ${quizData.length}`;
+            document.getElementById("questionText").innerText = q.question;
+
+            const optsContainer = document.getElementById("optionsContainer");
+            optsContainer.innerHTML = "";
+
+            q.options.forEach((opt, idx) => {
+                const label = document.createElement("label");
+                label.className = "flex items-center space-x-3 p-3.5 bg-slate-900 border border-slate-700/80 rounded-xl cursor-pointer hover:border-slate-500 transition text-sm text-slate-200";
+                label.innerHTML = `
+                    <input type="radio" name="quizOpt" value="${idx}" class="w-4 h-4 text-blue-600">
+                    <span>${opt}</span>
+                `;
+                optsContainer.appendChild(label);
+            });
+
+            document.getElementById("explanationBox").classList.add("hidden");
+            document.getElementById("submitAnswerBtn").classList.remove("hidden");
+            document.getElementById("nextQuestionBtn").classList.add("hidden");
+        }
+
+        function checkAnswer() {
+            const selected = document.querySelector('input[name="quizOpt"]:checked');
+            if (!selected) {
+                alert("Pilih salah satu jawaban!");
+                return;
+            }
+
+            const ans = parseInt(selected.value);
+            const q = quizData[activeQuizIndex];
+
+            document.getElementById("explanationText").innerText = q.explanation;
+            document.getElementById("explanationBox").classList.remove("hidden");
+
+            if (ans === q.correct) {
+                alert("Jawaban Benar! ");
+            } else {
+                alert("Jawaban belum tepat. Cek pembahasan di bawah.");
+            }
+
+            document.getElementById("submitAnswerBtn").classList.add("hidden");
+            document.getElementById("nextQuestionBtn").classList.remove("hidden");
+        }
+
+        function nextQuestion() {
+            loadQuizQuestion(activeQuizIndex + 1);
+        }
+
+        function filterQuizSubject(subj) {
+            alert(`Menampilkan drilling soal kategori: ${subj}`);
+        }
+
+        // AI TUTOR CHAT
+        function handleAIChat(e) {
+            e.preventDefault();
+            const input = document.getElementById("aiInput");
+            const val = input.value.trim();
+            if (!val) return;
+
+            const chatHistory = document.getElementById("chatHistory");
+
+            // User msg
+            const userMsg = document.createElement("div");
+            userMsg.className = "bg-blue-600 text-white p-3 rounded-xl max-w-[85%] ml-auto text-sm";
+            userMsg.innerText = val;
+            chatHistory.appendChild(userMsg);
+
+            input.value = "";
+
+            // Simulated AI reply
+            setTimeout(() => {
+                const aiMsg = document.createElement("div");
+                aiMsg.className = "bg-slate-900 border border-slate-700/60 p-3 rounded-xl max-w-[85%] text-slate-300 text-sm";
+                aiMsg.innerText = `[Tutor AI Danadyaksa]: Terkait pertanyaan kamu mengenai "${val}", pada materi IPS Kelas 11 hal ini berfokus pada analisis konsep dasar dan dampaknya terhadap struktur masyarakat atau indikator ekonomi.`;
+                chatHistory.appendChild(aiMsg);
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+            }, 600);
+        }
+
+        // ADMIN FUNCTIONS
+        function saveActiveToken() {
+            const val = document.getElementById("activeTokenInput").value.trim().toUpperCase();
+            if (!val) return;
+            activeToken = val;
+            alert(`Token Harian berhasil diperbarui menjadi: ${activeToken}`);
+        }
+
+        function generateQuestionAI() {
+            const subject = document.getElementById("genSubject").value;
+            const topic = document.getElementById("genTopic").value.trim() || "Materi Umum";
+
+            quizData.push({
+                subject: subject,
+                question: `[AI Generated] Berikut adalah soal latihan terkait materi ${subject} pada topik ${topic} untuk siswa kelas 11 IPS: Manakah pernyataan yang paling tepat berkaitan dengan dampak utama fenomena ini?`,
+                options: [
+                    "Opsi A: Mengoptimalkan efisiensi dan stabilitas lokal",
+                    "Opsi B: Mendorong timbulnya ketimpangan struktural",
+                    "Opsi C: Mempercepat pertumbuhan indeks pembangunan",
+                    "Opsi D: Menurunkan tingkat partisipasi aktif masyarakat"
+                ],
+                correct: 0,
+                explanation: `Penjelasan otomatis AI untuk topik ${topic}: Konsep ini merujuk pada analisis efisiensi materi ${subject} kelas 11.`
+            });
+
+            alert(`Berhasil! Soal baru untuk mapel ${subject} (${topic}) berhasil dibuat oleh AI dan masuk ke bank soal pelajar.`);
+            loadQuizQuestion(quizData.length - 1);
+        }
+
+        function uploadModule() {
+            const subject = document.getElementById("modSubject").value;
+            const title = document.getElementById("modTitle").value.trim();
+            const desc = document.getElementById("modDesc").value.trim();
+
+            if (!title) {
+                alert("Harap isi judul modul!");
+                return;
+            }
+
+            const grid = document.getElementById("modulesGrid");
+            const card = document.createElement("div");
+            card.className = "bg-slate-800 border border-slate-700 p-5 rounded-xl flex flex-col justify-between space-y-4";
+            card.innerHTML = `
+                <div>
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded">${subject}</span>
+                    <h4 class="font-bold text-white mt-2">${title}</h4>
+                    <p class="text-xs text-slate-400 mt-1">${desc || 'Modul baru terbit.'}</p>
+                </div>
+                <button onclick="alert('Membuka modul...')" class="w-full bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-semibold py-2 rounded-lg transition flex items-center justify-center space-x-1">
+                    <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                    <span>Baca / Unduh Modul</span>
+                </button>
+            `;
+            grid.appendChild(card);
+            lucide.createIcons();
+
+            alert(`Modul "${title}" berhasil diterbitkan ke katalog siswa!`);
+            document.getElementById("modTitle").value = "";
+            document.getElementById("modDesc").value = "";
+        }
+    </script>
+</body>
+</html>
+
