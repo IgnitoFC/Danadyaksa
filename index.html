@@ -1,241 +1,184 @@
-index.html
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danadyaksa - Platform Bimbel Canggih Kelas 11 IPS</title>
-    <!-- Tailwind CSS CDN -->
+    <title>Danadyaksa - Platform Bimbel Profesional Kelas 11 IPS</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
+        .view-section { display: none; }
+        .view-section.active { display: block; }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col antialiased">
 
-    <!-- TOP NAVIGATION BAR -->
-    <header class="bg-slate-800/90 backdrop-blur border-b border-slate-700/60 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <!-- Brand Logo -->
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-black text-xl text-white shadow-lg shadow-blue-500/20">
-                        D
-                    </div>
-                    <div>
-                        <span class="text-xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-200">
-                            DANADYAKSA
-                        </span>
-                        <span class="block text-[10px] font-semibold text-blue-400 tracking-wider uppercase">Bimbel Kelas 11 IPS</span>
-                    </div>
+    <!-- NAVBAR UTAMA -->
+    <header class="bg-slate-800/90 backdrop-blur border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-black text-xl text-white shadow-lg">
+                    D
                 </div>
+                <div>
+                    <span class="text-xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-200">
+                        DANADYAKSA
+                    </span>
+                    <span class="block text-[10px] font-semibold text-blue-400 tracking-wider uppercase">Kelas 11 IPS Profesional</span>
+                </div>
+            </div>
 
-                <!-- Navigation Status & Auth controls -->
-                <div class="flex items-center space-x-4">
-                    <div id="userInfo" class="hidden flex items-center space-x-3 bg-slate-900/60 border border-slate-700/80 px-3 py-1.5 rounded-lg text-sm">
-                        <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
-                        <span id="displayUser" class="font-medium text-slate-200">User</span>
-                        <span id="displayRole" class="px-2 py-0.5 text-[10px] uppercase tracking-wider font-bold rounded bg-blue-500/20 text-blue-300 border border-blue-500/30">Role</span>
-                    </div>
-                    <button id="logoutBtn" onclick="logout()" class="hidden text-sm bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 px-3 py-1.5 rounded-lg font-medium transition">
-                        Keluar
-                    </button>
+            <div class="flex items-center space-x-4">
+                <div id="navUserBadge" class="hidden items-center space-x-3 bg-slate-900/80 border border-slate-700 px-3 py-1.5 rounded-lg text-sm">
+                    <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+                    <span id="navUsername" class="font-medium text-slate-200"></span>
+                    <span id="navRole" class="px-2 py-0.5 text-[10px] uppercase font-bold rounded bg-blue-500/20 text-blue-300 border border-blue-500/30"></span>
                 </div>
+                <button id="navLogoutBtn" onclick="appLogout()" class="hidden text-sm bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 px-3 py-1.5 rounded-lg font-medium transition">
+                    Keluar
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- MAIN CONTAINER -->
+    <!-- KONTEN UTAMA APLIKASI -->
     <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
 
-        <!-- ==================== VIEW 1: AUTHENTICATION / LOGIN ==================== -->
-        <section id="view-login" class="tab-content active my-12">
-            <div class="max-w-md mx-auto bg-slate-800 border border-slate-700/80 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
-                <div class="absolute -right-10 -top-10 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
-                
+        <!-- ==================== VIEW 1: LOGIN / AUTENTIKASI ==================== -->
+        <section id="view-login" class="view-section active my-8">
+            <div class="max-w-md mx-auto bg-slate-800 border border-slate-700 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
                 <div class="text-center mb-8">
-                    <h2 class="text-2xl font-bold text-white">Selamat Datang</h2>
-                    <p class="text-sm text-slate-400 mt-1">Portal Pembelajaran & Evaluasi Kelas 11 IPS</p>
+                    <h2 class="text-2xl font-bold text-white">Login Danadyaksa</h2>
+                    <p class="text-sm text-slate-400 mt-1">Masukkan kredensial akun dan token harian valid</p>
                 </div>
 
-                <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-5">
+                <form onsubmit="handleLoginSubmit(event)" class="space-y-4">
                     <div>
-                        <label class="block text-xs font-semibold uppercase text-slate-400 mb-2">Role Akses</label>
-                        <select id="loginRole" onchange="toggleTokenInput()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-slate-200 focus:outline-none focus:border-blue-500 text-sm">
+                        <label class="block text-xs font-semibold uppercase text-slate-400 mb-2">Pilih Role</label>
+                        <select id="authRole" onchange="toggleAuthFields()" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-blue-500">
                             <option value="pelajar">Pelajar (Siswa Kelas 11 IPS)</option>
-                            <option value="admin">Admin / Tentor Danadyaksa</option>
+                            <option value="admin">Admin / Tentor Bimbel</option>
                         </select>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-semibold uppercase text-slate-400 mb-2">Nama Pengguna / ID</label>
-                        <input type="text" id="loginUser" required placeholder="Masukkan nama kamu" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-slate-200 focus:outline-none focus:border-blue-500 text-sm">
+                        <label class="block text-xs font-semibold uppercase text-slate-400 mb-2">Username</label>
+                        <input type="text" id="authUsername" required placeholder="Contoh: budi_ips / admin" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-blue-500">
                     </div>
 
-                    <div id="tokenField">
-                        <div class="flex justify-between items-center mb-2">
-                            <label class="block text-xs font-semibold uppercase text-slate-400">Token Akses Harian</label>
-                            <span class="text-[10px] text-blue-400">Reset Setiap 00:00 WIB</span>
-                        </div>
-                        <input type="text" id="loginToken" placeholder="Contoh: DNY-IPS11" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-slate-200 focus:outline-none focus:border-blue-500 font-mono tracking-widest uppercase text-sm">
-                        <p class="text-[11px] text-slate-500 mt-1">Dapatkan token harian dari admin/tentor bimbel.</p>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-slate-400 mb-2">Password</label>
+                        <input type="password" id="authPassword" required placeholder="••••••••" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-blue-500">
                     </div>
 
-                    <div id="deviceNotice" class="p-3 bg-blue-950/40 border border-blue-800/50 rounded-lg text-xs text-blue-300 flex items-start space-x-2">
-                        <i data-lucide="shield-check" class="w-4 h-4 text-blue-400 shrink-0 mt-0.5"></i>
-                        <span>Sistem Keamanan Device Binding aktif. Token kamu terikat otomatis pada perangkat ini.</span>
+                    <div id="authDailyTokenBox">
+                        <label class="block text-xs font-semibold uppercase text-slate-400 mb-2">Token Akses Harian</label>
+                        <input type="text" id="authDailyToken" placeholder="Contoh: DNY-IPS11" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-slate-200 font-mono tracking-widest uppercase text-sm focus:outline-none focus:border-blue-500">
+                        <p class="text-[11px] text-slate-500 mt-1">Token resmi dari admin bimbel hari ini.</p>
                     </div>
 
-                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-lg shadow-lg shadow-blue-600/30 transition text-sm flex items-center justify-center space-x-2">
-                        <span>Masuk ke Dashboard</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-lg shadow-lg shadow-blue-600/30 transition text-sm">
+                        Masuk Sistem
                     </button>
                 </form>
+
+                <div class="mt-6 pt-6 border-t border-slate-700 text-center text-xs text-slate-400">
+                    Akun Default Admin: Username <code class="text-blue-400">admin</code> | Password <code class="text-blue-400">admin123</code><br>
+                    Token Harian Default: <code class="text-blue-400 font-mono" id="displayDefaultToken">DNY-IPS11</code>
+                </div>
             </div>
         </section>
 
-        <!-- ==================== VIEW 2: DASHBOARD PELAJAR ==================== -->
-        <section id="view-pelajar" class="tab-content space-y-8">
-            <!-- Header Pelajar -->
-            <div class="bg-gradient-to-r from-slate-800 to-slate-800/60 border border-slate-700/80 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <!-- ==================== VIEW 2: DASHBOARD SISWA ==================== -->
+        <section id="view-pelajar" class="view-section space-y-6">
+            <div class="bg-gradient-to-r from-slate-800 to-slate-800/60 border border-slate-700 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
-                    <div class="inline-flex items-center space-x-2 bg-blue-500/10 border border-blue-500/20 px-3 py-1 rounded-full text-xs text-blue-400 font-medium mb-3">
-                        <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
-                        <span>Kurikulum Khusus Kelas 11 IPS</span>
-                    </div>
-                    <h1 class="text-2xl md:text-3xl font-extrabold text-white">Selamat Belajar, <span id="studentName">Siswa</span>!</h1>
-                    <p class="text-slate-400 text-sm mt-1">Pilih mata pelajaran atau akses drilling latihan soal IPS hari ini.</p>
+                    <span class="px-3 py-1 text-xs font-bold rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">Kelas 11 IPS Aktif</span>
+                    <h1 class="text-2xl md:text-3xl font-extrabold text-white mt-2">Halo, <span id="studentDisplayName">Siswa</span>!</h1>
+                    <p class="text-slate-400 text-sm mt-1">Platform pembelajaran interaktif dan drilling soal tersinkronisasi.</p>
                 </div>
-                <div class="bg-slate-900/80 border border-slate-700/80 p-4 rounded-xl flex items-center space-x-4">
-                    <div class="p-3 bg-indigo-500/10 text-indigo-400 rounded-lg">
-                        <i data-lucide="award" class="w-6 h-6"></i>
-                    </div>
+                <div class="bg-slate-900 border border-slate-700 px-4 py-3 rounded-xl flex items-center space-x-3">
+                    <div class="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg"><i data-lucide="check-circle" class="w-5 h-5"></i></div>
                     <div>
-                        <div class="text-xs text-slate-400">Total Latihan Tuntas</div>
-                        <div id="completedQuizzes" class="text-xl font-bold text-white">0 Set Soal</div>
+                        <div class="text-xs text-slate-400">Status Token</div>
+                        <div class="text-sm font-bold text-emerald-400">Terverifikasi (Valid)</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Tab Navigasi Pelajar -->
+            <!-- Tab Menu Siswa -->
             <div class="flex border-b border-slate-800 space-x-6 text-sm font-medium">
-                <button onclick="switchStudentSubTab('drilling')" id="subtab-btn-drilling" class="pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2">
+                <button onclick="switchStudentTab('drilling')" id="stab-btn-drilling" class="pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2">
                     <i data-lucide="target" class="w-4 h-4"></i>
                     <span>Drilling Soal IPS</span>
                 </button>
-                <button onclick="switchStudentSubTab('modul')" id="subtab-btn-modul" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2">
-                    <i data-lucide="file-text" class="w-4 h-4"></i>
-                    <span>Modul Pembelajaran</span>
+                <button onclick="switchStudentTab('modul')" id="stab-btn-modul" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2">
+                    <i data-lucide="book-open" class="w-4 h-4"></i>
+                    <span>Modul Bimbel</span>
                 </button>
-                <button onclick="switchStudentSubTab('ai')" id="subtab-btn-ai" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2">
+                <button onclick="switchStudentTab('ai')" id="stab-btn-ai" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2">
                     <i data-lucide="bot" class="w-4 h-4"></i>
                     <span>Danadyaksa AI Tutor</span>
                 </button>
             </div>
 
-            <!-- SUBTAB 1: DRILLING SOAL -->
-            <div id="student-subtab-drilling" class="space-y-6">
-                <!-- Quiz Subject Filter -->
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
-                    <button onclick="filterQuizSubject('Semua')" class="p-3 bg-slate-800 border border-slate-700 hover:border-blue-500 rounded-xl text-center text-xs font-semibold text-slate-200 transition">Semua Mapel</button>
-                    <button onclick="filterQuizSubject('Ekonomi')" class="p-3 bg-slate-800 border border-slate-700 hover:border-blue-500 rounded-xl text-center text-xs font-semibold text-slate-200 transition">Ekonomi</button>
-                    <button onclick="filterQuizSubject('Sosiologi')" class="p-3 bg-slate-800 border border-slate-700 hover:border-blue-500 rounded-xl text-center text-xs font-semibold text-slate-200 transition">Sosiologi</button>
-                    <button onclick="filterQuizSubject('Geografi')" class="p-3 bg-slate-800 border border-slate-700 hover:border-blue-500 rounded-xl text-center text-xs font-semibold text-slate-200 transition">Geografi</button>
-                    <button onclick="filterQuizSubject('Sejarah')" class="p-3 bg-slate-800 border border-slate-700 hover:border-blue-500 rounded-xl text-center text-xs font-semibold text-slate-200 transition">Sejarah</button>
-                    <button onclick="filterQuizSubject('B.Indo/Inggris')" class="p-3 bg-slate-800 border border-slate-700 hover:border-blue-500 rounded-xl text-center text-xs font-semibold text-slate-200 transition">B.Indo / Inggris</button>
-                </div>
-
-                <!-- Active Quiz Engine Box -->
-                <div class="bg-slate-800 border border-slate-700/80 rounded-2xl p-6 md:p-8">
-                    <div id="quizHeader" class="flex justify-between items-center mb-6 border-b border-slate-700 pb-4">
+            <!-- TAB 1: DRILLING SOAL -->
+            <div id="student-tab-drilling" class="space-y-4">
+                <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 md:p-8">
+                    <div class="flex justify-between items-center mb-6 border-b border-slate-700 pb-4">
                         <div>
-                            <span id="quizSubjectTag" class="px-2.5 py-1 text-xs font-bold rounded bg-blue-500/20 text-blue-400 border border-blue-500/30">Ekonomi Kelas 11</span>
-                            <h3 id="quizTitle" class="text-lg font-bold text-white mt-2">Drilling Konsep Pendapatan Nasional</h3>
+                            <span id="qSubjectBadge" class="px-2.5 py-1 text-xs font-bold rounded bg-blue-500/20 text-blue-400 border border-blue-500/30">Ekonomi</span>
+                            <h3 id="qTitle" class="text-lg font-bold text-white mt-2">Soal Latihan</h3>
                         </div>
-                        <div class="text-right">
-                            <span class="text-xs text-slate-400 block">Status Latihan</span>
-                            <span id="quizProgress" class="text-sm font-semibold text-blue-400">Soal 1 dari 3</span>
-                        </div>
+                        <span id="qCounter" class="text-xs font-semibold text-slate-400">Soal 1 dari 1</span>
                     </div>
 
-                    <!-- Question & Options area -->
-                    <div id="quizContainer">
-                        <p id="questionText" class="text-slate-200 text-base leading-relaxed mb-6">
-                            Komponen manakah yang diperhitungkan dalam penghitungan Pendapatan Nasional menggunakan pendekatan pengeluaran?
-                        </p>
-                        <div id="optionsContainer" class="space-y-3">
-                            <!-- Options rendered via JS -->
-                        </div>
-                        <div id="explanationBox" class="hidden mt-6 p-4 rounded-xl bg-slate-900 border border-slate-700 text-sm">
+                    <div id="quizBox">
+                        <p id="qText" class="text-slate-200 text-base mb-6 leading-relaxed">Memuat soal...</p>
+                        <div id="qOptions" class="space-y-3"></div>
+                        <div id="qExplanationBox" class="hidden mt-6 p-4 rounded-xl bg-slate-900 border border-slate-700 text-sm">
                             <h4 class="font-bold text-emerald-400 mb-1">Pembahasan:</h4>
-                            <p id="explanationText" class="text-slate-300 leading-relaxed"></p>
+                            <p id="qExplanation" class="text-slate-300 leading-relaxed"></p>
                         </div>
                         <div class="mt-6 flex justify-end space-x-3">
-                            <button id="submitAnswerBtn" onclick="checkAnswer()" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-2.5 rounded-lg text-sm transition">Jawab</button>
-                            <button id="nextQuestionBtn" onclick="nextQuestion()" class="hidden bg-slate-700 hover:bg-slate-600 text-white font-semibold px-6 py-2.5 rounded-lg text-sm transition">Soal Berikutnya</button>
+                            <button onclick="submitStudentAnswer()" id="btnSubmitAns" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-2.5 rounded-lg text-sm transition">Jawab Soal</button>
+                            <button onclick="nextStudentQuiz()" id="btnNextAns" class="hidden bg-slate-700 hover:bg-slate-600 text-white font-semibold px-6 py-2.5 rounded-lg text-sm transition">Soal Selanjutnya</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- SUBTAB 2: MODUL PEMBELAJARAN -->
-            <div id="student-subtab-modul" class="tab-content space-y-4">
-                <h3 class="text-lg font-bold text-white">Katalog Modul & Materi Rangkuman Kelas 11 IPS</h3>
-                <div id="modulesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <!-- Default Modules -->
-                    <div class="bg-slate-800 border border-slate-700 p-5 rounded-xl flex flex-col justify-between space-y-4">
-                        <div>
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded">Sosiologi</span>
-                            <h4 class="font-bold text-white mt-2">Kelompok Sosial & Harmoni Masyarakat</h4>
-                            <p class="text-xs text-slate-400 mt-1">Rangkuman dasar pembentukan kelompok sosial dan dinamika interaksi sosial.</p>
-                        </div>
-                        <button onclick="alert('Membuka modul PDF Sosiologi...')" class="w-full bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-semibold py-2 rounded-lg transition flex items-center justify-center space-x-1">
-                            <i data-lucide="download" class="w-3.5 h-3.5"></i>
-                            <span>Baca / Unduh Modul</span>
-                        </button>
-                    </div>
-                    <div class="bg-slate-800 border border-slate-700 p-5 rounded-xl flex flex-col justify-between space-y-4">
-                        <div>
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">Geografi</span>
-                            <h4 class="font-bold text-white mt-2">Posisi Strategis Indonesia & SDA</h4>
-                            <p class="text-xs text-slate-400 mt-1">Peta poros maritim dunia serta klasifikasi sumber daya alam Indonesia.</p>
-                        </div>
-                        <button onclick="alert('Membuka modul PDF Geografi...')" class="w-full bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-semibold py-2 rounded-lg transition flex items-center justify-center space-x-1">
-                            <i data-lucide="download" class="w-3.5 h-3.5"></i>
-                            <span>Baca / Unduh Modul</span>
-                        </button>
-                    </div>
+            <!-- TAB 2: MODUL -->
+            <div id="student-tab-modul" class="view-section space-y-4">
+                <h3 class="text-lg font-bold text-white">Daftar Modul Bimbel Kelas 11 IPS</h3>
+                <div id="studentModulesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Dinamis terisi dari localStorage / admin upload -->
                 </div>
             </div>
 
-            <!-- SUBTAB 3: AI TUTOR -->
-            <div id="student-subtab-ai" class="tab-content">
+            <!-- TAB 3: AI TUTOR REAL GEMINI -->
+            <div id="student-tab-ai" class="view-section">
                 <div class="bg-slate-800 border border-slate-700 rounded-2xl h-[500px] flex flex-col">
                     <div class="p-4 border-b border-slate-700 flex items-center space-x-3 bg-slate-800/80 rounded-t-2xl">
                         <div class="w-8 h-8 rounded-lg bg-indigo-600/30 text-indigo-400 border border-indigo-500/30 flex items-center justify-center">
                             <i data-lucide="bot" class="w-5 h-5"></i>
                         </div>
                         <div>
-                            <h4 class="font-bold text-sm text-white">Danadyaksa AI Study Buddy</h4>
-                            <p class="text-[11px] text-slate-400">Siap bantu jawab pertanyaan materi Ekonomi, Sosiologi, Geografi & Sejarah K-11</p>
+                            <h4 class="font-bold text-sm text-white">Danadyaksa AI Study Buddy (Gemini-powered)</h4>
+                            <p class="text-[11px] text-slate-400">Bertanya langsung mengenai materi Ekonomi, Sosiologi, Geografi & Sejarah Kelas 11</p>
                         </div>
                     </div>
-                    <!-- Chat box history -->
-                    <div id="chatHistory" class="flex-1 p-4 overflow-y-auto space-y-3 text-sm">
-                        <div class="bg-slate-900 border border-slate-700/60 p-3 rounded-xl max-w-[85%] text-slate-300">
-                            Halo! Saya Tutor AI Danadyaksa. Ada konsep atau soal materi IPS Kelas 11 yang ingin kamu tanyakan atau minta jelaskan?
+                    <div id="aiChatHistory" class="flex-1 p-4 overflow-y-auto space-y-3 text-sm">
+                        <div class="bg-slate-900 border border-slate-700 p-3 rounded-xl max-w-[85%] text-slate-300">
+                            Halo! Saya Tutor AI Danadyaksa yang terhubung langsung dengan mesin AI. Silakan tanyakan materi pelajaran IPS Kelas 11 apa saja yang ingin kamu pelajari!
                         </div>
                     </div>
-                    <!-- Chat input -->
                     <div class="p-3 border-t border-slate-700 bg-slate-900/60 rounded-b-2xl">
-                        <form onsubmit="handleAIChat(event)" class="flex space-x-2">
-                            <input type="text" id="aiInput" placeholder="Tanyakan rumusan Ekonomi atau konsep Sosiologi..." class="flex-1 bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
-                            <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2.5 rounded-lg font-semibold text-sm transition">Kirim</button>
+                        <form onsubmit="sendRealAIChat(event)" class="flex space-x-2">
+                            <input type="text" id="aiUserQuery" placeholder="Tanyakan konsep atau soal IPS..." class="flex-1 bg-slate-800 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
+                            <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2.5 rounded-lg font-semibold text-sm transition">Kirim AI</button>
                         </form>
                     </div>
                 </div>
@@ -243,66 +186,97 @@ index.html
         </section>
 
         <!-- ==================== VIEW 3: DASHBOARD ADMIN ==================== -->
-        <section id="view-admin" class="tab-content space-y-8">
-            <!-- Header Admin -->
+        <section id="view-admin" class="view-section space-y-6">
             <div class="bg-slate-800 border border-slate-700 p-6 md:p-8 rounded-2xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
-                    <span class="px-2.5 py-1 text-xs font-bold rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">Panel Pengelola / Tentor</span>
-                    <h1 class="text-2xl font-bold text-white mt-2">Manajemen Platform Danadyaksa</h1>
-                    <p class="text-sm text-slate-400">Atur Token Akses Harian, Impor Modul Bimbel, dan Generasi Soal AI.</p>
+                    <span class="px-3 py-1 text-xs font-bold rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">Panel Pengelola Utama</span>
+                    <h1 class="text-2xl font-bold text-white mt-2">Manajemen Konten & Keamanan Danadyaksa</h1>
+                    <p class="text-sm text-slate-400">Atur Token Harian, Daftarkan Akun Siswa, Generator AI Soal, & Unggah Modul.</p>
                 </div>
             </div>
 
-            <!-- Tab Navigasi Admin -->
-            <div class="flex border-b border-slate-800 space-x-6 text-sm font-medium">
-                <button onclick="switchAdminSubTab('token')" id="adm-tab-btn-token" class="pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2">
+            <!-- Tab Menu Admin -->
+            <div class="flex border-b border-slate-800 space-x-6 text-sm font-medium overflow-x-auto">
+                <button onclick="switchAdminTab('token')" id="adm-btn-token" class="pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2 shrink-0">
                     <i data-lucide="key" class="w-4 h-4"></i>
-                    <span>Atur Token Harian</span>
+                    <span>Token & API Key</span>
                 </button>
-                <button onclick="switchAdminSubTab('ai-gen')" id="adm-tab-btn-ai-gen" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2">
+                <button onclick="switchAdminTab('accounts')" id="adm-btn-accounts" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 shrink-0">
+                    <i data-lucide="users" class="w-4 h-4"></i>
+                    <span>Daftarkan Akun Siswa</span>
+                </button>
+                <button onclick="switchAdminTab('ai-gen')" id="adm-btn-ai-gen" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 shrink-0">
                     <i data-lucide="sparkles" class="w-4 h-4"></i>
                     <span>AI Question Generator</span>
                 </button>
-                <button onclick="switchAdminSubTab('upload')" id="adm-tab-btn-upload" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2">
+                <button onclick="switchAdminTab('upload')" id="adm-btn-upload" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 shrink-0">
                     <i data-lucide="upload" class="w-4 h-4"></i>
-                    <span>Impor Modul Bimbel</span>
+                    <span>Unggah Modul Bimbel</span>
                 </button>
             </div>
 
-            <!-- SUBTAB ADMIN 1: MANAGEMENT TOKEN HARIAN -->
-            <div id="admin-subtab-token" class="space-y-6">
-                <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 max-w-xl space-y-4">
-                    <h3 class="font-bold text-white text-base">Atur Token Akses Hari Ini</h3>
-                    <p class="text-xs text-slate-400">Token ini digunakan oleh seluruh siswa Kelas 11 IPS untuk mengakses platform hari ini.</p>
-                    
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-400 uppercase mb-2">Token Aktif Saat Ini</label>
-                        <div class="flex space-x-2">
-                            <input type="text" id="activeTokenInput" value="DNY-IPS11" class="flex-1 bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 font-mono text-blue-400 font-bold uppercase text-sm">
-                            <button onclick="saveActiveToken()" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-4 py-2.5 rounded-lg text-sm transition">Perbarui Token</button>
+            <!-- ADMIN TAB 1: TOKEN & API CONFIG -->
+            <div id="admin-tab-token" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 space-y-4">
+                        <h3 class="font-bold text-white text-base">Atur Token Harian Dinamis</h3>
+                        <p class="text-xs text-slate-400">Token ini wajib dimasukkan oleh siswa untuk mengakses platform setiap harinya.</p>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 uppercase mb-2">Token Aktif Hari Ini</label>
+                            <div class="flex space-x-2">
+                                <input type="text" id="adminTokenInput" class="flex-1 bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 font-mono text-blue-400 font-bold uppercase text-sm">
+                                <button onclick="saveAdminToken()" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-4 py-2.5 rounded-lg text-sm transition">Simpan Token</button>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="pt-4 border-t border-slate-700">
-                        <h4 class="text-xs font-bold text-slate-300 mb-2">Keamanan Terikat Perangkat (Device Lock Log)</h4>
-                        <div class="text-xs bg-slate-900 p-3 rounded-lg border border-slate-700 font-mono text-slate-400 space-y-1">
-                            <div>[SYSTEM] Device Lock Status: ACTIVE</div>
-                            <div>[LOG] Token "DNY-IPS11" terikat pada ID Perangkat Aktif.</div>
+                    <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 space-y-4">
+                        <h3 class="font-bold text-white text-base">Konfigurasi Gemini AI API Key</h3>
+                        <p class="text-xs text-slate-400">Masukkan API key Gemini kamu agar fitur AI Question Generator dan Tutor AI berfungsi nyata.</p>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 uppercase mb-2">Gemini API Key</label>
+                            <div class="flex space-x-2">
+                                <input type="password" id="adminApiKeyInput" placeholder="AIzaSy..." class="flex-1 bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 font-mono text-slate-200 text-sm">
+                                <button onclick="saveAdminApiKey()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-4 py-2.5 rounded-lg text-sm transition">Simpan Key</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- SUBTAB ADMIN 2: AI QUESTION GENERATOR -->
-            <div id="admin-subtab-ai-gen" class="tab-content space-y-6">
+            <!-- ADMIN TAB 2: DAFTARKAN AKUN SISWA -->
+            <div id="admin-tab-accounts" class="view-section space-y-6">
+                <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 max-w-xl space-y-4">
+                    <h3 class="font-bold text-white text-base">Buat Akun Siswa Baru</h3>
+                    <p class="text-xs text-slate-400">Daftarkan username dan password agar siswa bisa login ke aplikasi.</p>
+                    <form onsubmit="registerStudentAccount(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 uppercase mb-2">Username Siswa</label>
+                            <input type="text" id="regStudentUser" required placeholder="Contoh: andi_ips11" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-sm text-slate-200">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 uppercase mb-2">Password Siswa</label>
+                            <input type="password" id="regStudentPass" required placeholder="••••••••" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-sm text-slate-200">
+                        </div>
+                        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3 rounded-lg text-sm transition">Daftarkan Akun Siswa</button>
+                    </form>
+                    <div class="mt-4 pt-4 border-t border-slate-700">
+                        <h4 class="text-xs font-bold text-slate-300 mb-2">Daftar Siswa Terdaftar:</h4>
+                        <div id="registeredStudentsList" class="space-y-1 text-xs text-slate-400 font-mono"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADMIN TAB 3: AI QUESTION GENERATOR -->
+            <div id="admin-tab-ai-gen" class="view-section space-y-6">
                 <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 max-w-2xl space-y-4">
-                    <h3 class="font-bold text-white text-base">Generator Soal Otomatis Berbasis AI</h3>
-                    <p class="text-xs text-slate-400">Pilih mata pelajaran Kelas 11 IPS dan topik untuk membuat soal HOTS secara instan.</p>
+                    <h3 class="font-bold text-white text-base">AI Question Generator (Real Gemini Integration)</h3>
+                    <p class="text-xs text-slate-400">Menghasilkan soal pilihan ganda HOTS kelas 11 IPS secara otomatis menggunakan kecerdasan buatan.</p>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-xs font-semibold text-slate-400 mb-2">Mata Pelajaran</label>
-                            <select id="genSubject" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-xs text-slate-200">
+                            <select id="genMapel" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-xs text-slate-200">
                                 <option value="Ekonomi">Ekonomi</option>
                                 <option value="Sosiologi">Sosiologi</option>
                                 <option value="Geografi">Geografi</option>
@@ -310,343 +284,427 @@ index.html
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-400 mb-2">Topik Bahasan</label>
-                            <input type="text" id="genTopic" placeholder="Contoh: APBN & APBD" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-xs text-slate-200">
+                            <label class="block text-xs font-semibold text-slate-400 mb-2">Topik / Bab</label>
+                            <input type="text" id="genTopik" placeholder="Contoh: Kebijakan Moneter & Fiskal" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-xs text-slate-200">
                         </div>
                     </div>
 
-                    <button onclick="generateQuestionAI()" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 rounded-lg text-xs transition flex items-center justify-center space-x-2">
+                    <button onclick="triggerRealAIGenerator()" id="btnGenAI" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 rounded-lg text-xs transition flex items-center justify-center space-x-2">
                         <i data-lucide="sparkles" class="w-4 h-4"></i>
-                        <span>Generate & Tambahkan ke Bank Soal</span>
+                        <span>Generate Soal dengan Gemini AI</span>
                     </button>
                 </div>
             </div>
 
-            <!-- SUBTAB ADMIN 3: UPLOAD MODUL -->
-            <div id="admin-subtab-upload" class="tab-content space-y-6">
+            <!-- ADMIN TAB 4: UPLOAD MODUL -->
+            <div id="admin-tab-upload" class="view-section space-y-6">
                 <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 max-w-2xl space-y-4">
-                    <h3 class="font-bold text-white text-base">Impor Modul Bimbel / Materi IPS</h3>
-                    
+                    <h3 class="font-bold text-white text-base">Unggah Modul Bimbel / Rangkuman</h3>
                     <div>
                         <label class="block text-xs font-semibold text-slate-400 mb-2">Mata Pelajaran</label>
-                        <select id="modSubject" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-xs text-slate-200">
+                        <select id="modMapel" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-xs text-slate-200">
                             <option value="Ekonomi">Ekonomi</option>
                             <option value="Sosiologi">Sosiologi</option>
                             <option value="Geografi">Geografi</option>
                             <option value="Sejarah">Sejarah</option>
                         </select>
                     </div>
-
                     <div>
                         <label class="block text-xs font-semibold text-slate-400 mb-2">Judul Modul</label>
-                        <input type="text" id="modTitle" placeholder="Contoh: Rangkuman Bab 2 Sosiologi" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-xs text-slate-200">
+                        <input type="text" id="modJudul" placeholder="Contoh: Ringkasan Bab Pendapatan Nasional" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-xs text-slate-200">
                     </div>
-
                     <div>
-                        <label class="block text-xs font-semibold text-slate-400 mb-2">Deskripsi Ringkas</label>
-                        <textarea id="modDesc" rows="3" placeholder="Penjelasan singkat modul..." class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-xs text-slate-200"></textarea>
+                        <label class="block text-xs font-semibold text-slate-400 mb-2">Isi Ringkasan / Keterangan</label>
+                        <textarea id="modIsi" rows="3" placeholder="Tuliskan ringkasan materi..." class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-xs text-slate-200"></textarea>
                     </div>
-
-                    <button onclick="uploadModule()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3 rounded-lg text-xs transition">Terbitkan Modul ke Pelajar</button>
+                    <button onclick="adminUploadModule()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3 rounded-lg text-xs transition">Terbitkan Modul ke Siswa</button>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- FOOTER -->
-    <footer class="bg-slate-950 border-t border-slate-800/80 py-6 text-center text-xs text-slate-500 mt-auto">
-        <p>&copy; 2026 Danadyaksa Learning System - Khusus Kelas 11 SMA IPS</p>
+    <footer class="bg-slate-950 border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+        <p>&copy; 2026 Danadyaksa Learning Platform - Kelas 11 IPS Komersial</p>
     </footer>
 
-    <!-- JAVASCRIPT LOGIC -->
+    <!-- LOGIC SCRIPTS -->
     <script>
-        // DATA STATE APPLIKASI
-        let activeToken = "DNY-IPS11";
+        // INISIALISASI STORAGE DATA
+        if (!localStorage.getItem("dny_token")) {
+            localStorage.setItem("dny_token", "DNY-IPS11");
+        }
+        if (!localStorage.getItem("dny_students")) {
+            localStorage.setItem("dny_students", JSON.stringify([
+                { user: "budi_ips", pass: "123456" }
+            ]));
+        }
+        if (!localStorage.getItem("dny_quiz")) {
+            localStorage.setItem("dny_quiz", JSON.stringify([
+                {
+                    mapel: "Ekonomi",
+                    question: "Komponen manakah yang diperhitungkan dalam pendekatan pengeluaran Pendapatan Nasional?",
+                    options: [
+                        "Pendapatan sewa, upah, bunga, dan laba",
+                        "Konsumsi rumah tangga, investasi, pengeluaran pemerintah, dan ekspor bersih",
+                        "Nilai tambah sektor primer dan sekunder",
+                        "Pajak langsung dan subsidi pemerintah"
+                    ],
+                    correct: 1,
+                    explanation: "Pendekatan pengeluaran dihitung dengan rumus Y = C + I + G + (X - M)."
+                }
+            ]));
+        }
+        if (!localStorage.getItem("dny_modules")) {
+            localStorage.setItem("dny_modules", JSON.stringify([
+                { mapel: "Sosiologi", judul: "Kelompok Sosial Masyarakat", isi: "Materi dasar pembentukan kelompok sosial dan dinamika masyarakat." }
+            ]));
+        }
+
         let currentUser = null;
         let currentRole = null;
-        let activeQuizIndex = 0;
+        let activeQuizIdx = 0;
 
-        let quizData = [
-            {
-                subject: "Ekonomi",
-                question: "Komponen manakah yang secara langsung diperhitungkan dalam penghitungan Pendapatan Nasional menggunakan pendekatan Pengeluaran (Expenditure Approach)?",
-                options: [
-                    "Upah, Sewa, Bunga, dan Laba",
-                    "Konsumsi Rumah Tangga, Investasi, Pengeluaran Pemerintah, dan Ekspor Nett",
-                    "Nilai Tambah Sektor Pertanian dan Manufaktur",
-                    "Pajak Tidak Langsung dan Subsidi"
-                ],
-                correct: 1,
-                explanation: "Pendapatan nasional pendekatan pengeluaran dihitung dari penjumlahan Konsumsi (C) + Investasi (I) + Pengeluaran Pemerintah (G) + (Ekspor - Impor)."
-            },
-            {
-                subject: "Sosiologi",
-                question: "Suatu kelompok sosial yang terbentuk atas dasar ikatan batin yang murni, alami, dan kekal disebut oleh Ferdinand Tönnies sebagai...",
-                options: [
-                    "Gesellschaft (Patembayan)",
-                    "Gemeinschaft (Paguyuban)",
-                    "In-Group",
-                    "Reference Group"
-                ],
-                correct: 1,
-                explanation: "Gemeinschaft (Paguyuban) adalah bentuk kehidupan bersama di mana anggota-anggotanya diikat oleh hubungan batin yang murni, bersifat alamiah dan kekal (contoh: keluarga, ikatan kerabat)."
-            }
-        ];
-
-        // INITIALIZATION
         document.addEventListener("DOMContentLoaded", () => {
             lucide.createIcons();
-            loadQuizQuestion(0);
+            document.getElementById("displayDefaultToken").innerText = localStorage.getItem("dny_token");
+            document.getElementById("adminTokenInput").value = localStorage.getItem("dny_token");
+            if (localStorage.getItem("dny_apikey")) {
+                document.getElementById("adminApiKeyInput").value = localStorage.getItem("dny_apikey");
+            }
+            renderRegisteredStudents();
+            loadStudentQuiz(0);
+            loadStudentModules();
         });
 
-        // AUTHENTICATION LOGIC
-        function toggleTokenInput() {
-            const role = document.getElementById("loginRole").value;
-            const tokenField = document.getElementById("tokenField");
+        function toggleAuthFields() {
+            const role = document.getElementById("authRole").value;
+            const tokenBox = document.getElementById("authDailyTokenBox");
             if (role === "admin") {
-                tokenField.classList.add("hidden");
+                tokenBox.classList.add("hidden");
             } else {
-                tokenField.classList.remove("hidden");
+                tokenBox.classList.remove("hidden");
             }
         }
 
-        function handleLogin(e) {
+        function handleLoginSubmit(e) {
             e.preventDefault();
-            const role = document.getElementById("loginRole").value;
-            const user = document.getElementById("loginUser").value.trim();
-            const token = document.getElementById("loginToken").value.trim().toUpperCase();
+            const role = document.getElementById("authRole").value;
+            const user = document.getElementById("authUsername").value.trim();
+            const pass = document.getElementById("authPassword").value.trim();
+            const token = document.getElementById("authDailyToken").value.trim().toUpperCase();
 
-            if (!user) {
-                alert("Harap masukkan nama kamu!");
-                return;
+            if (role === "admin") {
+                if (user === "admin" && pass === "admin123") {
+                    loginSuccess(user, "admin");
+                } else {
+                    alert("Username atau Password Admin salah! (Default: admin / admin123)");
+                }
+            } else {
+                const students = JSON.parse(localStorage.getItem("dny_students"));
+                const found = students.find(s => s.user === user && s.pass === pass);
+                const dailyToken = localStorage.getItem("dny_token");
+
+                if (!found) {
+                    alert("Akun siswa tidak terdaftar atau password salah! Minta admin mendaftarkan akunmu.");
+                    return;
+                }
+                if (token !== dailyToken) {
+                    alert("Token Harian salah atau kedaluwarsa! Minta token terbaru pada admin.");
+                    return;
+                }
+                loginSuccess(user, "pelajar");
             }
+        }
 
-            if (role === "pelajar" && token !== activeToken) {
-                alert("Token Harian salah atau sudah kedaluwarsa! Minta token terbaru pada Admin Danadyaksa.");
-                return;
-            }
-
+        function loginSuccess(user, role) {
             currentUser = user;
             currentRole = role;
 
-            document.getElementById("displayUser").innerText = user;
-            document.getElementById("displayRole").innerText = role;
-            document.getElementById("userInfo").classList.remove("hidden");
-            document.getElementById("logoutBtn").classList.remove("hidden");
+            document.getElementById("navUsername").innerText = user;
+            document.getElementById("navRole").innerText = role;
+            document.getElementById("navUserBadge").classList.remove("hidden");
+            document.getElementById("navLogoutBtn").classList.remove("hidden");
 
-            // Switch View
-            document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
-            
+            document.querySelectorAll(".view-section").forEach(el => el.classList.remove("active"));
+
             if (role === "admin") {
                 document.getElementById("view-admin").classList.add("active");
             } else {
-                document.getElementById("studentName").innerText = user;
+                document.getElementById("studentDisplayName").innerText = user;
                 document.getElementById("view-pelajar").classList.add("active");
+                loadStudentQuiz(0);
             }
         }
 
-        function logout() {
+        function appLogout() {
             currentUser = null;
             currentRole = null;
-            document.getElementById("userInfo").classList.add("hidden");
-            document.getElementById("logoutBtn").classList.add("hidden");
-
-            document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
+            document.getElementById("navUserBadge").classList.add("hidden");
+            document.getElementById("navLogoutBtn").classList.add("hidden");
+            document.querySelectorAll(".view-section").forEach(el => el.classList.remove("active"));
             document.getElementById("view-login").classList.add("active");
         }
 
-        // SUBTAB NAVIGATION (STUDENT)
-        function switchStudentSubTab(tab) {
-            document.getElementById("student-subtab-drilling").classList.add("hidden");
-            document.getElementById("student-subtab-modul").classList.add("hidden");
-            document.getElementById("student-subtab-ai").classList.add("hidden");
+        // SISWA TABS
+        function switchStudentTab(tab) {
+            document.getElementById("student-tab-drilling").classList.add("hidden");
+            document.getElementById("student-tab-modul").classList.add("hidden");
+            document.getElementById("student-tab-ai").classList.add("hidden");
 
-            document.getElementById("subtab-btn-drilling").className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2";
-            document.getElementById("subtab-btn-modul").className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2";
-            document.getElementById("subtab-btn-ai").className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2";
+            document.getElementById("stab-btn-drilling").className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2";
+            document.getElementById("stab-btn-modul").className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2";
+            document.getElementById("stab-btn-ai").className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2";
 
             if (tab === 'drilling') {
-                document.getElementById("student-subtab-drilling").classList.remove("hidden");
-                document.getElementById("subtab-btn-drilling").className = "pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2 font-bold";
+                document.getElementById("student-tab-drilling").classList.remove("hidden");
+                document.getElementById("stab-btn-drilling").className = "pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2 font-bold";
             } else if (tab === 'modul') {
-                document.getElementById("student-subtab-modul").classList.remove("hidden");
-                document.getElementById("subtab-btn-modul").className = "pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2 font-bold";
+                document.getElementById("student-tab-modul").classList.remove("hidden");
+                document.getElementById("stab-btn-modul").className = "pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2 font-bold";
             } else if (tab === 'ai') {
-                document.getElementById("student-subtab-ai").classList.remove("hidden");
-                document.getElementById("subtab-btn-ai").className = "pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2 font-bold";
+                document.getElementById("student-tab-ai").classList.remove("hidden");
+                document.getElementById("stab-btn-ai").className = "pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2 font-bold";
             }
         }
 
-        // SUBTAB NAVIGATION (ADMIN)
-        function switchAdminSubTab(tab) {
-            document.getElementById("admin-subtab-token").classList.add("hidden");
-            document.getElementById("admin-subtab-ai-gen").classList.add("hidden");
-            document.getElementById("admin-subtab-upload").classList.add("hidden");
+        function loadStudentQuiz(idx) {
+            const quizList = JSON.parse(localStorage.getItem("dny_quiz"));
+            if (!quizList || quizList.length === 0) return;
+            if (idx >= quizList.length) idx = 0;
+            activeQuizIdx = idx;
+            const q = quizList[idx];
 
-            document.getElementById("adm-tab-btn-token").className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2";
-            document.getElementById("adm-tab-btn-ai-gen").className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2";
-            document.getElementById("adm-tab-btn-upload").className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2";
+            document.getElementById("qSubjectBadge").innerText = q.mapel + " Kelas 11";
+            document.getElementById("qCounter").innerText = `Soal ${idx + 1} dari ${quizList.length}`;
+            document.getElementById("qText").innerText = q.question;
 
-            if (tab === 'token') {
-                document.getElementById("admin-subtab-token").classList.remove("hidden");
-                document.getElementById("adm-tab-btn-token").className = "pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2 font-bold";
-            } else if (tab === 'ai-gen') {
-                document.getElementById("admin-subtab-ai-gen").classList.remove("hidden");
-                document.getElementById("adm-tab-btn-ai-gen").className = "pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2 font-bold";
-            } else if (tab === 'upload') {
-                document.getElementById("admin-subtab-upload").classList.remove("hidden");
-                document.getElementById("adm-tab-btn-upload").className = "pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2 font-bold";
-            }
-        }
-
-        // QUIZ DRILLING ENGINE
-        function loadQuizQuestion(index) {
-            if (index >= quizData.length) index = 0;
-            activeQuizIndex = index;
-            const q = quizData[index];
-
-            document.getElementById("quizSubjectTag").innerText = q.subject + " Kelas 11";
-            document.getElementById("quizProgress").innerText = `Soal ${index + 1} dari ${quizData.length}`;
-            document.getElementById("questionText").innerText = q.question;
-
-            const optsContainer = document.getElementById("optionsContainer");
-            optsContainer.innerHTML = "";
-
-            q.options.forEach((opt, idx) => {
-                const label = document.createElement("label");
-                label.className = "flex items-center space-x-3 p-3.5 bg-slate-900 border border-slate-700/80 rounded-xl cursor-pointer hover:border-slate-500 transition text-sm text-slate-200";
-                label.innerHTML = `
-                    <input type="radio" name="quizOpt" value="${idx}" class="w-4 h-4 text-blue-600">
-                    <span>${opt}</span>
+            const optsBox = document.getElementById("qOptions");
+            optsBox.innerHTML = "";
+            q.options.forEach((opt, i) => {
+                optsBox.innerHTML += `
+                    <label class="flex items-center space-x-3 p-3.5 bg-slate-900 border border-slate-700 rounded-xl cursor-pointer hover:border-slate-500 text-sm">
+                        <input type="radio" name="studentOpt" value="${i}" class="w-4 h-4 text-blue-600">
+                        <span>${opt}</span>
+                    </label>
                 `;
-                optsContainer.appendChild(label);
             });
 
-            document.getElementById("explanationBox").classList.add("hidden");
-            document.getElementById("submitAnswerBtn").classList.remove("hidden");
-            document.getElementById("nextQuestionBtn").classList.add("hidden");
+            document.getElementById("qExplanationBox").classList.add("hidden");
+            document.getElementById("btnSubmitAns").classList.remove("hidden");
+            document.getElementById("btnNextAns").classList.add("hidden");
         }
 
-        function checkAnswer() {
-            const selected = document.querySelector('input[name="quizOpt"]:checked');
+        function submitStudentAnswer() {
+            const selected = document.querySelector('input[name="studentOpt"]:checked');
             if (!selected) {
-                alert("Pilih salah satu jawaban!");
+                alert("Pilih salah satu opsi jawaban terlebih dahulu!");
                 return;
             }
-
             const ans = parseInt(selected.value);
-            const q = quizData[activeQuizIndex];
+            const quizList = JSON.parse(localStorage.getItem("dny_quiz"));
+            const q = quizList[activeQuizIdx];
 
-            document.getElementById("explanationText").innerText = q.explanation;
-            document.getElementById("explanationBox").classList.remove("hidden");
+            document.getElementById("qExplanation").innerText = q.explanation;
+            document.getElementById("qExplanationBox").classList.remove("hidden");
 
             if (ans === q.correct) {
-                alert("Jawaban Benar! ");
+                alert("Jawaban Benar! 🎉");
             } else {
-                alert("Jawaban belum tepat. Cek pembahasan di bawah.");
+                alert("Jawaban Kurang Tepat. Cek pembahasan di bawah.");
             }
 
-            document.getElementById("submitAnswerBtn").classList.add("hidden");
-            document.getElementById("nextQuestionBtn").classList.remove("hidden");
+            document.getElementById("btnSubmitAns").classList.add("hidden");
+            document.getElementById("btnNextAns").classList.remove("hidden");
+            document.getElementById("btnNextAns").onclick = () => loadStudentQuiz(activeQuizIdx + 1);
         }
 
-        function nextQuestion() {
-            loadQuizQuestion(activeQuizIndex + 1);
-        }
-
-        function filterQuizSubject(subj) {
-            alert(`Menampilkan drilling soal kategori: ${subj}`);
-        }
-
-        // AI TUTOR CHAT
-        function handleAIChat(e) {
-            e.preventDefault();
-            const input = document.getElementById("aiInput");
-            const val = input.value.trim();
-            if (!val) return;
-
-            const chatHistory = document.getElementById("chatHistory");
-
-            // User msg
-            const userMsg = document.createElement("div");
-            userMsg.className = "bg-blue-600 text-white p-3 rounded-xl max-w-[85%] ml-auto text-sm";
-            userMsg.innerText = val;
-            chatHistory.appendChild(userMsg);
-
-            input.value = "";
-
-            // Simulated AI reply
-            setTimeout(() => {
-                const aiMsg = document.createElement("div");
-                aiMsg.className = "bg-slate-900 border border-slate-700/60 p-3 rounded-xl max-w-[85%] text-slate-300 text-sm";
-                aiMsg.innerText = `[Tutor AI Danadyaksa]: Terkait pertanyaan kamu mengenai "${val}", pada materi IPS Kelas 11 hal ini berfokus pada analisis konsep dasar dan dampaknya terhadap struktur masyarakat atau indikator ekonomi.`;
-                chatHistory.appendChild(aiMsg);
-                chatHistory.scrollTop = chatHistory.scrollHeight;
-            }, 600);
-        }
-
-        // ADMIN FUNCTIONS
-        function saveActiveToken() {
-            const val = document.getElementById("activeTokenInput").value.trim().toUpperCase();
-            if (!val) return;
-            activeToken = val;
-            alert(`Token Harian berhasil diperbarui menjadi: ${activeToken}`);
-        }
-
-        function generateQuestionAI() {
-            const subject = document.getElementById("genSubject").value;
-            const topic = document.getElementById("genTopic").value.trim() || "Materi Umum";
-
-            quizData.push({
-                subject: subject,
-                question: `[AI Generated] Berikut adalah soal latihan terkait materi ${subject} pada topik ${topic} untuk siswa kelas 11 IPS: Manakah pernyataan yang paling tepat berkaitan dengan dampak utama fenomena ini?`,
-                options: [
-                    "Opsi A: Mengoptimalkan efisiensi dan stabilitas lokal",
-                    "Opsi B: Mendorong timbulnya ketimpangan struktural",
-                    "Opsi C: Mempercepat pertumbuhan indeks pembangunan",
-                    "Opsi D: Menurunkan tingkat partisipasi aktif masyarakat"
-                ],
-                correct: 0,
-                explanation: `Penjelasan otomatis AI untuk topik ${topic}: Konsep ini merujuk pada analisis efisiensi materi ${subject} kelas 11.`
+        function loadStudentModules() {
+            const mods = JSON.parse(localStorage.getItem("dny_modules"));
+            const grid = document.getElementById("studentModulesGrid");
+            grid.innerHTML = "";
+            mods.forEach(m => {
+                grid.innerHTML += `
+                    <div class="bg-slate-800 border border-slate-700 p-5 rounded-xl flex flex-col justify-between space-y-4">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded">${m.mapel}</span>
+                            <h4 class="font-bold text-white mt-2">${m.judul}</h4>
+                            <p class="text-xs text-slate-400 mt-1">${m.isi}</p>
+                        </div>
+                        <button onclick="alert('Membuka modul: ${m.judul}')" class="w-full bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-semibold py-2 rounded-lg transition">Baca Modul</button>
+                    </div>
+                `;
             });
-
-            alert(`Berhasil! Soal baru untuk mapel ${subject} (${topic}) berhasil dibuat oleh AI dan masuk ke bank soal pelajar.`);
-            loadQuizQuestion(quizData.length - 1);
         }
 
-        function uploadModule() {
-            const subject = document.getElementById("modSubject").value;
-            const title = document.getElementById("modTitle").value.trim();
-            const desc = document.getElementById("modDesc").value.trim();
+        // ADMIN TABS
+        function switchAdminTab(tab) {
+            document.getElementById("admin-tab-token").classList.add("hidden");
+            document.getElementById("admin-tab-accounts").classList.add("hidden");
+            document.getElementById("admin-tab-ai-gen").classList.add("hidden");
+            document.getElementById("admin-tab-upload").classList.add("hidden");
 
-            if (!title) {
-                alert("Harap isi judul modul!");
+            document.getElementById("adm-btn-token").className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 shrink-0";
+            document.getElementById("adm-btn-accounts").className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 shrink-0";
+            document.getElementById("adm-btn-ai-gen").className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 shrink-0";
+            document.getElementById("adm-btn-upload").className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 shrink-0";
+
+            if (tab === 'token') {
+                document.getElementById("admin-tab-token").classList.remove("hidden");
+                document.getElementById("adm-btn-token").className = "pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2 font-bold shrink-0";
+            } else if (tab === 'accounts') {
+                document.getElementById("admin-tab-accounts").classList.remove("hidden");
+                document.getElementById("adm-btn-accounts").className = "pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2 font-bold shrink-0";
+            } else if (tab === 'ai-gen') {
+                document.getElementById("admin-tab-ai-gen").classList.remove("hidden");
+                document.getElementById("adm-btn-ai-gen").className = "pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2 font-bold shrink-0";
+            } else if (tab === 'upload') {
+                document.getElementById("admin-tab-upload").classList.remove("hidden");
+                document.getElementById("adm-btn-upload").className = "pb-3 border-b-2 border-blue-500 text-blue-400 flex items-center space-x-2 font-bold shrink-0";
+            }
+        }
+
+        function saveAdminToken() {
+            const val = document.getElementById("adminTokenInput").value.trim().toUpperCase();
+            if (!val) return;
+            localStorage.setItem("dny_token", val);
+            document.getElementById("displayDefaultToken").innerText = val;
+            alert("Token Harian berhasil diperbarui secara permanen!");
+        }
+
+        function saveAdminApiKey() {
+            const key = document.getElementById("adminApiKeyInput").value.trim();
+            localStorage.setItem("dny_apikey", key);
+            alert("Gemini API Key berhasil disimpan!");
+        }
+
+        function registerStudentAccount(e) {
+            e.preventDefault();
+            const user = document.getElementById("regStudentUser").value.trim();
+            const pass = document.getElementById("regStudentPass").value.trim();
+            let students = JSON.parse(localStorage.getItem("dny_students"));
+            
+            if (students.some(s => s.user === user)) {
+                alert("Username siswa sudah terdaftar!");
                 return;
             }
 
-            const grid = document.getElementById("modulesGrid");
-            const card = document.createElement("div");
-            card.className = "bg-slate-800 border border-slate-700 p-5 rounded-xl flex flex-col justify-between space-y-4";
-            card.innerHTML = `
-                <div>
-                    <span class="text-[10px] font-bold uppercase tracking-wider text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded">${subject}</span>
-                    <h4 class="font-bold text-white mt-2">${title}</h4>
-                    <p class="text-xs text-slate-400 mt-1">${desc || 'Modul baru terbit.'}</p>
-                </div>
-                <button onclick="alert('Membuka modul...')" class="w-full bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-semibold py-2 rounded-lg transition flex items-center justify-center space-x-1">
-                    <i data-lucide="download" class="w-3.5 h-3.5"></i>
-                    <span>Baca / Unduh Modul</span>
-                </button>
-            `;
-            grid.appendChild(card);
-            lucide.createIcons();
+            students.push({ user, pass });
+            localStorage.setItem("dny_students", JSON.stringify(students));
+            renderRegisteredStudents();
+            alert(`Akun siswa "${user}" berhasil didaftarkan!`);
+            document.getElementById("regStudentUser").value = "";
+            document.getElementById("regStudentPass").value = "";
+        }
 
-            alert(`Modul "${title}" berhasil diterbitkan ke katalog siswa!`);
-            document.getElementById("modTitle").value = "";
-            document.getElementById("modDesc").value = "";
+        function renderRegisteredStudents() {
+            const students = JSON.parse(localStorage.getItem("dny_students"));
+            const list = document.getElementById("registeredStudentsList");
+            list.innerHTML = "";
+            students.forEach((s, i) => {
+                list.innerHTML += `<div>${i + 1}. Username: <b>${s.user}</b> | Pass: ${s.pass}</div>`;
+            });
+        }
+
+        function adminUploadModule() {
+            const mapel = document.getElementById("modMapel").value;
+            const judul = document.getElementById("modJudul").value.trim();
+            const isi = document.getElementById("modIsi").value.trim();
+
+            if (!judul) {
+                alert("Judul modul wajib diisi!");
+                return;
+            }
+
+            let mods = JSON.parse(localStorage.getItem("dny_modules"));
+            mods.push({ mapel, judul, isi });
+            localStorage.setItem("dny_modules", JSON.stringify(mods));
+            loadStudentModules();
+            alert("Modul berhasil diterbitkan ke halaman siswa!");
+            document.getElementById("modJudul").value = "";
+            document.getElementById("modIsi").value = "";
+        }
+
+        // REAL GEMINI AI INTEGRATION
+        async function triggerRealAIGenerator() {
+            const apiKey = localStorage.getItem("dny_apikey");
+            if (!apiKey) {
+                alert("Masukkan Gemini API Key terlebih dahulu di menu Token & API Key!");
+                switchAdminTab('token');
+                return;
+            }
+
+            const mapel = document.getElementById("genMapel").value;
+            const topik = document.getElementById("genTopik").value.trim() || "Materi Umum";
+            const btn = document.getElementById("btnGenAI");
+            btn.innerText = "Membuat Soal via Gemini AI...";
+            btn.disabled = true;
+
+            const prompt = `Buatkan 1 soal pilihan ganda HOTS untuk siswa SMA Kelas 11 Jurusan IPS mata pelajaran ${mapel} dengan topik "${topik}". Format respons HARUS berupa JSON murni tanpa markdown lain dengan struktur: {"question": "...", "options": ["A", "B", "C", "D"], "correct": 0, "explanation": "..."}`;
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                });
+
+                const data = await response.json();
+                const rawText = data.candidates[0].content.parts[0].text;
+                const cleanJson = rawText.replace(/```json/g, "").replace(/```/g, "").trim();
+                const parsed = JSON.parse(cleanJson);
+
+                let quizList = JSON.parse(localStorage.getItem("dny_quiz"));
+                quizList.push({
+                    mapel: mapel,
+                    question: parsed.question,
+                    options: parsed.options,
+                    correct: parsed.correct,
+                    explanation: parsed.explanation
+                });
+                localStorage.setItem("dny_quiz", JSON.stringify(quizList));
+                loadStudentQuiz(quizList.length - 1);
+
+                alert("Soal berhasil di-generate oleh Gemini AI dan langsung masuk ke sistem latihan siswa!");
+            } catch (err) {
+                console.error(err);
+                alert("Gagal menghubungi Gemini API. Periksa kembali API Key Anda.");
+            } finally {
+                btn.innerText = "Generate Soal dengan Gemini AI";
+                btn.disabled = false;
+            }
+        }
+
+        async function sendRealAIChat(e) {
+            e.preventDefault();
+            const input = document.getElementById("aiUserQuery");
+            const q = input.value.trim();
+            if (!q) return;
+
+            const history = document.getElementById("aiChatHistory");
+            history.innerHTML += `<div class="bg-blue-600 text-white p-3 rounded-xl max-w-[85%] ml-auto text-sm">${q}</div>`;
+            input.value = "";
+
+            const apiKey = localStorage.getItem("dny_apikey");
+            let replyText = "API Key Gemini belum disetel oleh Admin. Hubungi admin bimbel.";
+
+            if (apiKey) {
+                try {
+                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ contents: [{ parts: [{ text: `Bertindaklah sebagai Tutor Bimbel profesional untuk siswa SMA Kelas 11 IPS. Jawablah pertanyaan berikut dengan ringkas, jelas, dan mendidik: ${q}` }] }] })
+                    });
+                    const data = await response.json();
+                    replyText = data.candidates[0].content.parts[0].text;
+                } catch (err) {
+                    replyText = "Terjadi kesalahan saat memproses permintaan AI.";
+                }
+            }
+
+            history.innerHTML += `<div class="bg-slate-900 border border-slate-700 p-3 rounded-xl max-w-[85%] text-slate-300 text-sm">${replyText}</div>`;
+            history.scrollTop = history.scrollHeight;
         }
     </script>
 </body>
 </html>
-
