@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Danayaksa: Modul UH Matematika</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f6f8fb;--card:#fff;--fg:#14213d;--mut:#5b6678;--bd:#d9e0ea;--a:#0e7c7b;--b:#d9822b;--ok:#157347;--no:#b42318;--soft:#e6f3f3;color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1624;--card:#17202f;--fg:#e8edf5;--mut:#9aa7bb;--bd:#2a3750;--a:#4fd1c5;--b:#f0a95a;--ok:#5fd38d;--no:#ff8a7a;--soft:#12313a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1624;--card:#17202f;--fg:#e8edf5;--mut:#9aa7bb;--bd:#2a3750;--a:#4fd1c5;--b:#f0a95a;--ok:#5fd38d;--no:#ff8a7a;--soft:#12313a;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 "Plus Jakarta Sans",system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:16px}
+h1{font-size:1.7rem;line-height:1.2;margin:8px 0 4px;font-weight:800}
+h2{font-size:1.25rem;margin:22px 0 8px}
+h3{font-size:1.05rem;margin:16px 0 6px}
+p{margin:6px 0}.mut{color:var(--mut);font-size:.92rem}
+nav{display:flex;gap:6px;overflow-x:auto;padding:10px 0;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5}
+nav button{flex:none;border:1px solid var(--bd);background:var(--card);color:var(--fg);padding:8px 14px;border-radius:999px;font:inherit;font-size:.92rem;cursor:pointer}
+nav button[aria-selected=true]{background:var(--a);border-color:var(--a);color:#fff;font-weight:600}
+@media(prefers-color-scheme:dark){nav button[aria-selected=true]{color:#06222a}}
+section{display:none}section.on{display:block}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:14px;margin:12px 0}
+.f{background:var(--soft);border-left:4px solid var(--a);padding:10px 14px;margin:10px 0;border-radius:0 8px 8px 0;font-size:1.02rem;overflow-x:auto}
+.f b{display:block;font-size:.85rem;color:var(--mut);font-weight:600}
+.warn{border-left-color:var(--b);background:transparent;border:1px dashed var(--b);border-left:4px solid var(--b)}
+label{display:block;margin:10px 0 2px;font-size:.92rem}label b{float:right}
+input[type=range]{width:100%;accent-color:var(--a)}
+select,input[type=text]{font:inherit;padding:8px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--fg)}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:12px 0}
+.out div{background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:8px 10px;font-size:.85rem;color:var(--mut)}
+.out strong{display:block;font-size:1.05rem;color:var(--fg)}
+.sc{overflow-x:auto}
+svg{width:100%;height:auto;display:block}
+table{border-collapse:collapse;width:100%;font-size:.85rem;min-width:460px}
+th,td{border-bottom:1px solid var(--bd);padding:6px 8px;text-align:right}th:first-child,td:first-child{text-align:center}
+th{color:var(--mut);font-weight:600}
+details{border:1px solid var(--bd);border-radius:8px;margin:8px 0;background:var(--card)}
+summary{padding:10px 12px;cursor:pointer;font-weight:600}
+details>div{padding:0 12px 12px}
+.btn{font:inherit;background:var(--a);color:#fff;border:0;border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:600}
+@media(prefers-color-scheme:dark){.btn{color:#06222a}}
+.btn.g{background:transparent;color:var(--fg);border:1px solid var(--bd)}
+.fb{margin-top:8px;font-weight:600}.fb.ok{color:var(--ok)}.fb.no{color:var(--no)}
+.q{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.q input{flex:1;min-width:150px}
+.tag{font-size:.78rem;color:var(--mut)}
+sub,sup{line-height:0}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 3px;line-height:1.3}.fr>span:first-child{border-bottom:1.5px solid currentColor;padding:0 4px}.fr>span:last-child{padding:0 4px}
+.ket{font-size:.93rem;color:var(--fg);margin:-4px 0 12px;padding:8px 12px;border:1px dashed var(--bd);border-radius:8px;background:var(--card)}.ket b{color:var(--a)}
+.brand{font-weight:800;letter-spacing:.06em;color:var(--a);margin:0}
+body::after{content:'Danayaksa';position:fixed;inset:0;display:flex;align-items:center;justify-content:center;font-size:20vw;font-weight:800;transform:rotate(-28deg);opacity:.04;pointer-events:none}
+:focus-visible{outline:2px solid var(--a);outline-offset:2px}
+</style>
+</head>
+<body>
+<main>
+<p class="brand">Danayaksa</p>
+<h1>Modul UH Matematika</h1>
+<p class="mut">Bunga Tunggal · Bunga Majemuk · Peluruhan · Anuitas. Geser slider, buka contoh soal, lalu kerjakan latihan.</p>
+<nav id="nav" role="tablist"></nav>
+
+<section id="s0">
+<h2>Dasar dulu (baca pelan-pelan)</h2>
+<div class="card">
+<p><b>1. Persen diubah ke desimal.</b> Persen artinya "per seratus". Jadi 8% = <span class='fr'><span>8</span><span>100</span></span> = 0,08. Cara cepat: geser koma 2 tempat ke kiri (10% = 0,10 dan 2,5% = 0,025).</p>
+<p><b>2. Bunga</b> adalah uang tambahan dari bank. Contoh: menabung Rp100.000 dengan bunga 10% per tahun. Setelah 1 tahun kamu dapat tambahan Rp10.000.</p>
+<p><b>3. Periode</b> adalah jarak waktu bunga dihitung: 1 tahun, 1 semester (6 bulan), 1 triwulan (3 bulan), atau 1 bulan. Satuan bunga dan satuan waktu harus sama.</p>
+<p><b>4. Tunggal atau majemuk?</b> Tunggal: bunga selalu dihitung dari uang awal saja. Majemuk: bunga dihitung dari uang awal ditambah bunga sebelumnya ("bunga berbunga"), jadi lebih cepat naik.</p>
+</div>
+<h2>Rumus-rumus utama</h2>
+<p class="mut">Setiap rumus ada keterangannya di bawah kotak. Kalau bingung, cari simbolnya di keterangan itu.</p>
+<div class="f"><b>Bunga tunggal</b>Bunga: B = M<sub>0</sub> × i × n<br>Modal akhir: M<sub>n</sub> = M<sub>0</sub>(1 + n × i)</div>
+<div class="ket"><b>Modal awal (M<sub>0</sub>)</b> = uang di awal. <b>Bunga (i)</b> = persen bunga per periode, ditulis desimal. <b>Lama (n)</b> = banyak periode. <b>Total bunga (B)</b> = uang tambahan seluruhnya. <b>Modal akhir (M<sub>n</sub>)</b> = uang di akhir, yaitu modal ditambah bunga.</div>
+<div class="f"><b>Bunga majemuk</b>M<sub>n</sub> = M<sub>0</sub>(1 + i)<sup>n</sup></div>
+<div class="ket">Simbolnya sama dengan bunga tunggal. (1 + i)<sup>n</sup> artinya (1 + i) dikalikan sendiri sebanyak n kali. Contoh (1,1)³ = 1,1 × 1,1 × 1,1 = 1,331.</div>
+<div class="f"><b>Mencari modal awal</b>M<sub>0</sub> = <span class='fr'><span>M<sub>n</sub></span><span>(1 + i)<sup>n</sup></span></span></div>
+<div class="ket">Dipakai kalau yang diketahui modal akhir (M<sub>n</sub>) dan ditanya modal awal (M<sub>0</sub>). Rumusnya hanya pembalikan dari rumus majemuk.</div>
+<div class="f"><b>Bunga per periode</b>i = <span class='fr'><span>bunga per tahun</span><span>m</span></span></div>
+<div class="ket"><b>m</b> = berapa kali bunga dihitung dalam setahun: semester m = 2, triwulan m = 4, bulanan m = 12. Banyak periode n = lama (tahun) × m.</div>
+<div class="f"><b>Pertumbuhan</b>N<sub>t</sub> = N<sub>0</sub>(1 + p)<sup>t</sup><br><b>Peluruhan</b>N<sub>t</sub> = N<sub>0</sub>(1 − p)<sup>t</sup></div>
+<div class="ket"><b>Nilai awal (N<sub>0</sub>)</b>. <b>Persen perubahan per periode (p)</b>, ditulis desimal. <b>Banyak periode (t)</b>. <b>Nilai setelah t periode (N<sub>t</sub>)</b>. Tumbuh = bertambah, jadi pakai tanda +. Luruh = berkurang, jadi pakai tanda −.</div>
+<div class="f"><b>Waktu paruh</b>N<sub>t</sub> = N<sub>0</sub> × <span class='fr'><span>1</span><span>2</span></span><sup><span class='fr'><span>t</span><span>T</span></span></sup></div>
+<div class="ket"><b>Waktu paruh (T)</b> = waktu yang dibutuhkan agar jumlahnya tinggal setengah. <b>t</b> = waktu yang sudah berlalu. Pangkatnya <span class='fr'><span>t</span><span>T</span></span> = berapa kali sudah "dipotong setengah".</div>
+<div class="f"><b>Anuitas</b>A = <span class='fr'><span>M<sub>0</sub> × i</span><span>1 − (1 + i)<sup>−n</sup></span></span></div>
+<div class="ket"><b>Anuitas (A)</b> = cicilan tetap tiap periode. <b>Pinjaman awal (M<sub>0</sub>)</b>. <b>Bunga per periode (i)</b>. <b>Banyak cicilan (n)</b>. Satu cicilan terdiri dari bunga dan angsuran: A = a<sub>n</sub> + b<sub>n</sub>.</div>
+<div class="f"><b>Isi cicilan</b>Bunga: b<sub>n</sub> = i × S<sub>n−1</sub><br>Angsuran: a<sub>n</sub> = A − b<sub>n</sub><br>Sisa pinjaman: S<sub>n</sub> = S<sub>n−1</sub> − a<sub>n</sub></div>
+<div class="ket"><b>Bunga (b<sub>n</sub>)</b> = bunga pada cicilan ke-n. <b>Angsuran (a<sub>n</sub>)</b> = bagian cicilan yang benar-benar mengurangi hutang. <b>Sisa pinjaman (S<sub>n</sub>)</b> = hutang yang masih tersisa setelah cicilan ke-n. S<sub>n−1</sub> = sisa hutang sebelum cicilan ke-n, dan S<sub>0</sub> = M<sub>0</sub>.</div>
+<div class="f"><b>Angsuran naik terus</b>a<sub>n+1</sub> = a<sub>n</sub>(1 + i) &nbsp; atau &nbsp; a<sub>n</sub> = a<sub>1</sub>(1 + i)<sup>n−1</sup></div>
+<div class="ket">Angsuran tiap periode naik dikali (1 + i). <b>a<sub>1</sub></b> = angsuran pertama, <b>a<sub>n</sub></b> = angsuran ke-n.</div>
+<h3>Cara cepat mengenali jenis soal</h3>
+<div class="card sc"><table style="min-width:0"><tr><th style="text-align:left">Kata kunci di soal</th><th style="text-align:left">Pakai</th></tr>
+<tr><td style="text-align:left">"bunga tunggal", "bunga sederhana", bunga dihitung dari modal awal saja</td><td style="text-align:left">M(1 + i·t)</td></tr>
+<tr><td style="text-align:left">"bunga majemuk", "berbunga", "bunga berbunga", per semester/triwulan/bulan</td><td style="text-align:left">M(1 + i)<sup>n</sup></td></tr>
+<tr><td style="text-align:left">"menyusut", "turun", "waktu paruh", "berkurang x% per tahun"</td><td style="text-align:left">N<sub>0</sub>(1 − p)<sup>t</sup></td></tr>
+<tr><td style="text-align:left">"angsuran", "anuitas", "sisa pinjaman", "rencana angsuran"</td><td style="text-align:left">Tabel anuitas</td></tr></table></div>
+<h3>Checklist sebelum menjawab</h3>
+<div class="card"><p>1. Satuan waktu sudah sama dengan satuan bunga? Ubah bulan ke tahun: <span class='fr'><span>bulan</span><span>12</span></span> tahun.</p><p>2. Bunga tahunan tapi periode semester? Bunga per periode = <span class='fr'><span>i</span><span>2</span></span>, n = tahun × 2.</p><p>3. Persen diubah ke desimal (8% = 0,08).</p><p>4. Anuitas: angsuran pertama = A − bunga pertama, lalu naik dikali (1 + i).</p><p>5. Tulis rumus dulu, baru masukkan angka. Nilai langkah sering lebih besar dari nilai akhir.</p></div>
+</section>
+
+<section id="s1">
+<h2>Bunga tunggal</h2>
+<p>Bunga hanya dihitung dari modal awal, jadi tambahan tiap tahun selalu sama. Grafiknya berupa garis lurus.</p>
+<div class="f"><b>Rumus</b>B = M<sub>0</sub> × i × t<br>M<sub>t</sub> = M<sub>0</sub> + B = M<sub>0</sub>(1 + i × t)</div><div class="ket"><b>Modal awal (M<sub>0</sub>)</b> = uang di awal. <b>Bunga per tahun (i)</b> = persen bunga dalam desimal. <b>Lama (t)</b> = dalam tahun. Kalau waktunya bulan, ubah dulu: 8 bulan = <span class='fr'><span>8</span><span>12</span></span> tahun. <b>Total bunga (B)</b>. <b>Modal akhir (M<sub>t</sub>)</b> = modal awal + bunga.</div>
+<div class="card">
+<label>Modal awal (M<sub>0</sub>), juta rupiah <b id="o1a"></b><input type="range" id="a1" min="1" max="100" value="5"></label>
+<label>Bunga per tahun (i), dalam persen <b id="o1b"></b><input type="range" id="b1" min="1" max="20" value="8"></label>
+<label>Lama (n), tahun <b id="o1c"></b><input type="range" id="c1" min="1" max="15" value="5"></label>
+<div class="out"><div>Total bunga (B)<strong id="r1a"></strong></div><div>Modal akhir (M<sub>n</sub>)<strong id="r1b"></strong></div><div>Tambahan per tahun<strong id="r1c"></strong></div></div>
+<div id="g1"></div>
+</div>
+<h3>Tipe soal</h3>
+<details><summary>Tipe 1: mencari modal akhir (waktu dalam bulan)</summary><div><p>Modal Rp4.000.000 dibungakan 9% per tahun selama 8 bulan. Berapa modal akhirnya?</p>
+<p>Bunga = 4.000.000 × 0,09 × <span class='fr'><span>8</span><span>12</span></span> = Rp240.000.<br>Modal akhir = 4.000.000 + 240.000 = <b>Rp4.240.000</b>.</p></div></details>
+<details><summary>Tipe 2: mencari persentase bunga</summary><div><p>Modal Rp3.000.000 menjadi Rp3.450.000 setelah 2,5 tahun. Berapa bunga per tahunnya?</p>
+<p>Bunga = 450.000 = 3.000.000 × i × 2,5 → i = <span class='fr'><span>450.000</span><span>7.500.000</span></span> = <b>6% per tahun</b>.</p></div></details>
+<details><summary>Tipe 3: mencari modal awal</summary><div><p>Setelah 3 tahun, tabungan menjadi Rp4.600.000 dengan bunga tunggal 5% per tahun. Berapa modal awalnya?</p>
+<p>M(1 + 0,05×3) = 4.600.000 → M × 1,15 = 4.600.000 → M = <b>Rp4.000.000</b>.</p></div></details>
+</section>
+
+<section id="s2">
+<h2>Bunga majemuk</h2>
+<p>Bunga ikut dimodalkan lagi di periode berikutnya, jadi pertumbuhannya makin cepat. Bandingkan dengan bunga tunggal pada grafik.</p>
+<div class="f"><b>Rumus</b>M<sub>n</sub> = M<sub>0</sub>(1 + i)<sup>n</sup><br>Modal awal: M<sub>0</sub> = <span class='fr'><span>M<sub>n</sub></span><span>(1 + i)<sup>n</sup></span></span></div><div class="ket"><b>Modal awal (M<sub>0</sub>)</b>. <b>Bunga per periode (i)</b> dalam desimal. <b>Banyak periode (n)</b>. <b>Modal akhir (M<sub>n</sub>)</b>. Kalau bunga dihitung m kali setahun (semester m = 2, triwulan m = 4, bulan m = 12): i = <span class='fr'><span>bunga per tahun</span><span>m</span></span> dan n = tahun × m.</div>
+<div class="card">
+<label>Modal awal (M<sub>0</sub>), juta rupiah <b id="o2a"></b><input type="range" id="a2" min="1" max="100" value="10"></label>
+<label>Bunga per tahun (i), dalam persen <b id="o2b"></b><input type="range" id="b2" min="1" max="20" value="10"></label>
+<label>Lama (n), tahun <b id="o2c"></b><input type="range" id="c2" min="1" max="15" value="10"></label>
+<label>Periode bunga <select id="m2"><option value="1">Tahunan</option><option value="2">Semesteran</option><option value="4">Triwulanan</option><option value="12">Bulanan</option></select></label>
+<div class="out"><div>Modal akhir (M<sub>n</sub>), majemuk<strong id="r2a"></strong></div><div>Modal akhir (M<sub>n</sub>), tunggal<strong id="r2b"></strong></div><div>Selisih<strong id="r2c"></strong></div></div>
+<div id="g2"></div>
+</div>
+<h3>Tipe soal</h3>
+<details><summary>Tipe 1: bunga tahunan</summary><div><p>Rp6.000.000 dibungakan majemuk 10% per tahun selama 3 tahun.</p><p>M₃ = 6.000.000 × (1,1)³ = 6.000.000 × 1,331 = <b>Rp7.986.000</b>.</p></div></details>
+<details><summary>Tipe 2: periode bukan tahunan</summary><div><p>Rp2.000.000, bunga 12% per tahun, dimajemukkan per triwulan selama 2 tahun.</p><p>i per periode = <span class='fr'><span>12%</span><span>4</span></span> = 3%, n = 2 × 4 = 8.<br>M = 2.000.000 × (1,03)<sup>8</sup> = 2.000.000 × 1,26677 ≈ <b>Rp2.533.540</b>.</p></div></details>
+<details><summary>Tipe 3: masa bunga pecahan</summary><div><p>Rp5.000.000, bunga majemuk 10% per tahun, lama 2 tahun 3 bulan.</p><p>Bagian bulat pakai majemuk, sisa bulan pakai bunga tunggal:<br>M = 5.000.000 × (1,1)² × (1 + 0,1 × <span class='fr'><span>3</span><span>12</span></span>) = 5.000.000 × 1,21 × 1,025 = <b>Rp6.201.250</b>.</p></div></details>
+<details><summary>Tipe 4: nilai tunai dan mencari lama</summary><div><p>a) Berapa yang harus ditabung sekarang agar 3 tahun lagi menjadi Rp13.310.000 (10% per tahun)?<br>M = <span class='fr'><span>13.310.000</span><span>(1,1)³</span></span> = <span class='fr'><span>13.310.000</span><span>1,331</span></span> = <b>Rp10.000.000</b>.</p><p>b) Berapa lama Rp1.000.000 menjadi Rp1.464.100 pada 10% per tahun?<br>1,1<sup>n</sup> = 1,4641 = 1,1<sup>4</sup> → <b>n = 4 tahun</b>.</p></div></details>
+</section>
+
+<section id="s3">
+<h2>Pertumbuhan dan peluruhan</h2>
+<p>Dasarnya sama dengan bunga majemuk. Pertumbuhan memakai faktor (1 + p), peluruhan memakai faktor (1 − p).</p>
+<div class="f"><b>Rumus</b>Tumbuh: N<sub>t</sub> = N<sub>0</sub>(1 + p)<sup>t</sup><br>Luruh: N<sub>t</sub> = N<sub>0</sub>(1 − p)<sup>t</sup><br>Waktu paruh: N<sub>t</sub> = N<sub>0</sub> × <span class='fr'><span>1</span><span>2</span></span><sup><span class='fr'><span>t</span><span>T</span></span></sup></div><div class="ket"><b>Nilai awal (N<sub>0</sub>)</b>. <b>Persen perubahan per periode (p)</b> dalam desimal. <b>Banyak periode (t)</b>. <b>Nilai akhir (N<sub>t</sub>)</b>. <b>Waktu paruh (T)</b> = waktu agar tinggal setengah, jadi <span class='fr'><span>t</span><span>T</span></span> = berapa kali sudah dipotong setengah.</div>
+<div class="ket"><b>Penulisan di LKM gurumu:</b> peluruhan ditulis P = P<sub>0</sub>(1 − i)<sup>t</sup>. P = nilai akhir, P<sub>0</sub> = nilai awal, i = persen penyusutan (desimal), t = lama waktu. Isinya sama dengan N<sub>t</sub> = N<sub>0</sub>(1 − p)<sup>t</sup>.</div>
+<div class="card">
+<label>Jenis <select id="k3"><option value="-1">Peluruhan (menyusut)</option><option value="1">Pertumbuhan</option></select></label>
+<label>Nilai awal (N<sub>0</sub>) <b id="o3a"></b><input type="range" id="a3" min="100" max="1000" step="50" value="500"></label>
+<label>Persen perubahan per periode (p) <b id="o3b"></b><input type="range" id="b3" min="1" max="30" value="10"></label>
+<label>Banyak periode (t) <b id="o3c"></b><input type="range" id="c3" min="1" max="20" value="8"></label>
+<div class="out"><div>Nilai akhir<strong id="r3a"></strong></div><div>Perubahan total<strong id="r3b"></strong></div><div>Faktor per periode<strong id="r3c"></strong></div></div>
+<div id="g3"></div>
+</div>
+<div class="card"><b>Kalkulator waktu paruh</b>
+<label>Massa awal (N<sub>0</sub>), gram <b id="o3d"></b><input type="range" id="d3" min="100" max="1000" step="20" value="640"></label>
+<label>Waktu paruh (T), jam <b id="o3e"></b><input type="range" id="e3" min="1" max="10" value="2"></label>
+<label>Waktu berlalu (t), jam <b id="o3f"></b><input type="range" id="f3" min="0" max="40" value="10"></label>
+<div class="out"><div>Sisa massa<strong id="r3d"></strong></div><div>Banyak paruh<strong id="r3e"></strong></div></div></div>
+<h3>Tipe soal</h3>
+<details><summary>Tipe 1: nilai barang menyusut</summary><div><p>Motor Rp20.000.000 menyusut 15% per tahun. Nilai setelah 2 tahun?</p><p>20.000.000 × (0,85)² = 20.000.000 × 0,7225 = <b>Rp14.450.000</b>.</p></div></details>
+<details><summary>Tipe 2: waktu paruh</summary><div><p>800 gram zat, waktu paruh 3 hari. Sisa setelah 12 hari?</p><p>Banyak paruh = <span class='fr'><span>12</span><span>3</span></span> = 4 → 800 × <span class='fr'><span>1</span><span>2</span></span><sup>4</sup> = <span class='fr'><span>800</span><span>16</span></span> = <b>50 gram</b>.</p></div></details>
+<details><summary>Tipe 3: jumlah penduduk berkurang</summary><div><p>Penduduk 500.000 jiwa turun 2% per tahun. Setelah 3 tahun?</p><p>500.000 × (0,98)³ = 500.000 × 0,941192 ≈ <b>470.596 jiwa</b>.</p></div></details>
+</section>
+
+<section id="s4">
+<h2>Anuitas</h2>
+<p>Anuitas adalah pembayaran tetap tiap periode yang terdiri dari bunga dan angsuran. Bunga makin kecil, angsuran makin besar, jumlahnya selalu sama.</p>
+<div class="f"><b>Rumus</b>A = <span class='fr'><span>M<sub>0</sub> × i</span><span>1 − (1 + i)<sup>−n</sup></span></span><br>Bunga: b<sub>n</sub> = i × S<sub>n−1</sub><br>Angsuran: a<sub>n</sub> = A − b<sub>n</sub><br>Sisa pinjaman: S<sub>n</sub> = S<sub>n−1</sub> − a<sub>n</sub><br>Angsuran naik: a<sub>n+1</sub> = a<sub>n</sub>(1 + i)</div><div class="ket"><b>Anuitas (A)</b> = cicilan tetap tiap periode. <b>Pinjaman awal (M<sub>0</sub>)</b>. <b>Bunga per periode (i)</b> dalam desimal. <b>Banyak cicilan (n)</b>. <b>Bunga (b<sub>n</sub>)</b> = bunga cicilan ke-n. <b>Angsuran (a<sub>n</sub>)</b> = bagian cicilan yang mengurangi hutang. <b>Sisa pinjaman (S<sub>n</sub>)</b> = hutang setelah cicilan ke-n, dengan S<sub>0</sub> = M<sub>0</sub>.</div>
+<div class="card">
+<label>Pinjaman awal (M<sub>0</sub>), juta rupiah <b id="o4a"></b><input type="range" id="a4" min="1" max="100" value="10"></label>
+<label>Bunga per periode (i), dalam persen <b id="o4b"></b><input type="range" id="b4" min="1" max="12" value="5"></label>
+<label>Banyak cicilan (n) <b id="o4c"></b><input type="range" id="c4" min="2" max="12" value="5"></label>
+<div class="out"><div>Anuitas (A) per periode<strong id="r4a"></strong></div><div>Total dibayar<strong id="r4b"></strong></div><div>Total bunga<strong id="r4c"></strong></div></div>
+<div class="sc"><table id="t4"></table></div>
+<div class="ket"><b>Simbol di LKM gurumu:</b> bunga = B, angsuran = a, sisa pinjaman = H. Di buku lain ditulis b<sub>n</sub>, a<sub>n</sub>, S<sub>n</sub>, artinya sama.<br><b>Cara membaca tabel</b> (baris per baris):<br>1. <b>Pinjaman awal</b> = hutang sebelum cicilan. Baris pertama = M<sub>0</sub>, baris berikutnya = sisa dari baris atas.<br>2. <b>Bunga (B)</b> = i × pinjaman awal baris itu.<br>3. <b>Angsuran (a)</b> = anuitas dikurangi bunga.<br>4. <b>Anuitas (A)</b> = cicilan tetap, nilainya sama di semua baris.<br>5. <b>Sisa pinjaman (H)</b> = pinjaman awal dikurangi angsuran. Di baris terakhir hasilnya 0.<br>Perhatikan: angsuran naik dikali (1 + i) tiap baris, bunga makin kecil.</div>
+</div>
+<h3>Tipe soal</h3>
+<details><summary>Tipe 1: menghitung anuitas dan tabel angsuran</summary><div><p>Pinjaman Rp1.000.000, bunga 10% per tahun, dilunasi 2 tahun.</p>
+<p>A = <span class='fr'><span>1.000.000 × 0,1</span><span>1 − 1,1<sup>−2</sup></span></span> = <span class='fr'><span>100.000</span><span>0,173554</span></span> ≈ <b>Rp576.190</b><br>Tahun 1: bunga 100.000, angsuran 476.190, sisa 523.810.<br>Tahun 2: bunga 52.381, angsuran 523.810, sisa 0.<br>Cek: 476.190 × 1,1 = 523.809 ✓</p></div></details>
+<details><summary>Tipe 2: anuitas diketahui, cari bunga dan angsuran</summary><div><p>Pinjaman Rp6.000.000, bunga 5% per periode, anuitas Rp1.800.000. Cari bunga dan angsuran periode ke-2.</p>
+<p>Periode 1: bunga 300.000, angsuran 1.500.000, sisa 4.500.000.<br>Periode 2: bunga = 5% × 4.500.000 = <b>225.000</b>, angsuran = 1.800.000 − 225.000 = <b>1.575.000</b> (cek: 1.500.000 × 1,05 ✓).</p></div></details>
+<details><summary>Tipe 3: angsuran ke-k dan jumlah beberapa angsuran</summary><div><p>Angsuran pertama Rp1.000.000, bunga 10%. Cari angsuran ke-4 dan jumlah 3 angsuran pertama.</p>
+<p>a₄ = 1.000.000 × (1,1)³ = <b>Rp1.331.000</b>.<br>Jumlah 3 angsuran = 1.000.000 × <span class='fr'><span>1,1³ − 1</span><span>0,1</span></span> = <b>Rp3.310.000</b>.<br>Sisa pinjaman = pinjaman awal − jumlah angsuran yang sudah dibayar.</p></div></details>
+</section>
+
+<section id="s5">
+<h2>Latihan soal</h2>
+<p class="mut">Ketik angka saja. Tanpa "Rp", tanpa titik ribuan. Desimal pakai koma. Jawaban pembulatan diterima jika selisihnya sangat kecil.</p>
+<div class="card"><b id="score">Skor: 0 dari 12 benar</b> &nbsp; <button class="btn g" id="reset">Ulangi semua</button></div>
+<div id="qs"></div>
+</section>
+<section id="s6">
+<h2>Gaya LKM guru</h2>
+<p class="mut">Soal dari gurumu biasanya berbentuk: isi tabel, tulis langkah (Diketahui, Ditanya, Jawab), lalu simpulkan. Latih semuanya di sini.</p>
+<div class="card"><b>Cara menulis jawaban</b>
+<p><b>Soal:</b> Budi menabung Rp5.000.000 dengan bunga tunggal 6% per tahun. Berapa bunga setelah 3 tahun?</p>
+<div class="f"><b>Diketahui</b>M<sub>0</sub> = 5.000.000 &nbsp; i = 6% = 0,06 &nbsp; n = 3 tahun<br><b style="display:inline">Ditanya:</b> bunga (B)<br><b style="display:inline">Jawab:</b> B = M<sub>0</sub> × i × n = 5.000.000 × 0,06 × 3 = <b style="display:inline">Rp900.000</b></div>
+<p class="mut">Urutannya selalu: rumus, masukkan angka, hitung, tulis hasil beserta satuannya. Kalau soal memberi nilai pangkat (misalnya (1,04)³ = 1,124864), pakai nilai itu langsung.</p></div>
+<h3>Tabel 1: bunga tunggal (Rp2.000.000, 10% per tahun)</h3><div class="card sc" id="tb1"></div>
+<h3>Tabel 2: bunga majemuk (Rp10.000.000, 10% per tahun)</h3><div class="card sc" id="tb2"></div>
+<h3>Tabel 3: rencana angsuran anuitas</h3>
+<p class="mut">Pinjaman Rp12.000.000, bunga 2% per bulan, 4 bulan, anuitas A = Rp3.152.000 (pembulatan dari 3.151.485).</p>
+<div class="card sc" id="tb3"></div>
+<div class="ket"><b>Catatan penting:</b> di LKM gurumu, angsuran bulan ke-3 tertulis 2.970.832. Kalau dihitung dengan rumus, hasilnya 3.029.645 (sisa 6.117.760, bunga 122.355, angsuran 3.152.000 − 122.355). Karena anuitas dibulatkan, sisa akhir bisa selisih beberapa ribu dari 0. Tanyakan ke gurumu untuk memastikan, dan di UH pakai hasil perhitungan rumus.</div>
+</section>
+<p class="mut" style="text-align:center;margin-top:28px">Modul Bimbel Danayaksa</p>
+</main>
+<script>
+const $=s=>document.querySelector(s),v=id=>+$("#"+id).value;
+const rp=n=>"Rp"+Math.round(n).toLocaleString("id-ID"),num=n=>(+n.toFixed(2)).toLocaleString("id-ID");
+const tabs=["Ringkasan","Bunga tunggal","Bunga majemuk","Peluruhan","Anuitas","Latihan","Gaya LKM"];
+const nav=$("#nav");
+tabs.forEach((t,i)=>{const b=document.createElement("button");b.textContent=t;b.setAttribute("role","tab");b.onclick=()=>show(i);nav.appendChild(b)});
+function show(i){tabs.forEach((_,k)=>{$("#s"+k).classList.toggle("on",k==i);nav.children[k].setAttribute("aria-selected",k==i)});scrollTo(0,0)}
+function chart(id,series,fmt){
+ const W=420,H=210,L=44,B=24,T=10,R=10,pts=series[0].d.length,max=Math.max(...series.flatMap(s=>s.d))*1.05,min=Math.min(0,...series.flatMap(s=>s.d));
+ const X=i=>L+(W-L-R)*i/Math.max(1,pts-1),Y=y=>T+(H-T-B)*(1-(y-min)/(max-min));
+ let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Grafik">`;
+ for(let k=0;k<=4;k++){const y=min+(max-min)*k/4;s+=`<line x1="${L}" x2="${W-R}" y1="${Y(y)}" y2="${Y(y)}" stroke="var(--bd)"/><text x="${L-4}" y="${Y(y)+4}" text-anchor="end" font-size="10" fill="var(--mut)">${fmt(y)}</text>`}
+ s+=`<text x="${L}" y="${H-6}" font-size="10" fill="var(--mut)">0</text><text x="${W-R}" y="${H-6}" font-size="10" text-anchor="end" fill="var(--mut)">periode ${pts-1}</text>`;
+ series.forEach((se,j)=>{const c=j?"var(--b)":"var(--a)";s+=`<polyline fill="none" stroke="${c}" stroke-width="2.5" points="${se.d.map((y,i)=>X(i)+","+Y(y)).join(" ")}"/>`;
+ if(pts<=21)se.d.forEach((y,i)=>s+=`<circle cx="${X(i)}" cy="${Y(y)}" r="2.5" fill="${c}"/>`);
+ s+=`<text x="${L+8+j*140}" y="${T+10}" font-size="11" fill="${c}" font-weight="600">● ${se.n}</text>`});
+ $("#"+id).innerHTML=s+"</svg>"}
+const jt=n=>n>=1e6?num(n/1e6)+" jt":n>=1e3?num(n/1e3)+" rb":num(n);
+function r1(){const M=v("a1")*1e6,i=v("b1")/100,t=v("c1");
+ $("#o1a").textContent=v("a1")+" jt";$("#o1b").textContent=v("b1")+"%";$("#o1c").textContent=t+" th";
+ $("#r1a").textContent=rp(M*i*t);$("#r1b").textContent=rp(M*(1+i*t));$("#r1c").textContent=rp(M*i);
+ chart("g1",[{n:"Bunga tunggal",d:Array.from({length:t+1},(_,k)=>M*(1+i*k))}],jt)}
+function r2(){const M=v("a2")*1e6,i=v("b2")/100,t=v("c2"),m=v("m2");
+ $("#o2a").textContent=v("a2")+" jt";$("#o2b").textContent=v("b2")+"%";$("#o2c").textContent=t+" th";
+ const maj=k=>M*Math.pow(1+i/m,k*m),tun=k=>M*(1+i*k);
+ $("#r2a").textContent=rp(maj(t));$("#r2b").textContent=rp(tun(t));$("#r2c").textContent=rp(maj(t)-tun(t));
+ const ks=Array.from({length:t+1},(_,k)=>k);
+ chart("g2",[{n:"Majemuk",d:ks.map(maj)},{n:"Tunggal",d:ks.map(tun)}],jt)}
+function r3(){const s=+$("#k3").value,N=v("a3"),p=v("b3")/100,t=v("c3"),f=1+s*p;
+ $("#o3a").textContent=N;$("#o3b").textContent=v("b3")+"%";$("#o3c").textContent=t;
+ $("#r3a").textContent=num(N*Math.pow(f,t));$("#r3b").textContent=num(N*Math.pow(f,t)-N);$("#r3c").textContent="× "+num(f);
+ chart("g3",[{n:s<0?"Peluruhan":"Pertumbuhan",d:Array.from({length:t+1},(_,k)=>N*Math.pow(f,k))}],x=>num(x));
+ const m=v("d3"),T=v("e3"),w=v("f3");
+ $("#o3d").textContent=m+" g";$("#o3e").textContent=T+" jam";$("#o3f").textContent=w+" jam";
+ $("#r3d").textContent=num(m*Math.pow(.5,w/T))+" g";$("#r3e").textContent=num(w/T)+" kali"}
+function anu(M,i,n){return M*i/(1-Math.pow(1+i,-n))}
+function r4(){const M=v("a4")*1e6,i=v("b4")/100,n=v("c4"),A=anu(M,i,n);
+ $("#o4a").textContent=v("a4")+" jt";$("#o4b").textContent=v("b4")+"%";$("#o4c").textContent=n;
+ $("#r4a").textContent=rp(A);$("#r4b").textContent=rp(A*n);$("#r4c").textContent=rp(A*n-M);
+ let S=M,h="<tr><th>Bulan/periode (t)</th><th>Pinjaman awal (Rp)</th><th>Bunga (B)</th><th>Angsuran (a)</th><th>Anuitas (A)</th><th>Sisa pinjaman (H)</th></tr>";
+ for(let k=1;k<=n;k++){const b=S*i,a=A-b;h+=`<tr><td>${k}</td><td>${rp(S)}</td><td>${rp(b)}</td><td>${rp(a)}</td><td>${rp(A)}</td><td>${rp(Math.max(0,S-a))}</td></tr>`;S-=a}
+ $("#t4").innerHTML=h}
+document.addEventListener("input",e=>{const id=e.target.id||"";if(/1$/.test(id))r1();else if(/2$/.test(id))r2();else if(/3$/.test(id))r3();else if(/4$/.test(id))r4()});
+const Q=[
+{t:"Bunga tunggal",q:"Modal Rp5.000.000 dibungakan tunggal 8% per tahun selama 18 bulan. Berapa modal akhirnya (rupiah)?",a:5e6*(1+.08*1.5),e:"Bunga = 5.000.000 × 0,08 × 1,5 = 600.000. Modal akhir = 5.600.000."},
+{t:"Bunga tunggal",q:"Rp2.000.000 menjadi Rp2.360.000 dengan bunga tunggal 6% per tahun. Berapa tahun lamanya?",a:360000/(2e6*.06),e:"Bunga 360.000 = 2.000.000 × 0,06 × t, sehingga t = <span class='fr'><span>360.000</span><span>120.000</span></span> = 3 tahun."},
+{t:"Bunga majemuk",q:"Rp10.000.000 dibungakan majemuk 10% per tahun selama 3 tahun. Berapa modal akhirnya (rupiah)?",a:10e6*Math.pow(1.1,3),e:"10.000.000 × 1,1³ = 10.000.000 × 1,331 = 13.310.000."},
+{t:"Bunga majemuk",q:"Rp8.000.000, bunga 12% per tahun dimajemukkan per semester selama 2 tahun. Berapa modal akhirnya (rupiah)?",a:8e6*Math.pow(1.06,4),e:"i = 6% per semester, n = 4. 8.000.000 × 1,06⁴ ≈ 8.000.000 × 1,262477 ≈ 10.099.816."},
+{t:"Bunga majemuk",q:"Rp5.000.000, bunga majemuk 10% per tahun, selama 2 tahun 3 bulan. Berapa modal akhirnya (rupiah)?",a:5e6*1.21*1.025,e:"5.000.000 × 1,1² × (1 + 0,1 × <span class='fr'><span>3</span><span>12</span></span>) = 5.000.000 × 1,21 × 1,025 = 6.201.250."},
+{t:"Pertumbuhan",q:"Populasi 20.000 ekor tumbuh 5% per tahun. Berapa ekor setelah 4 tahun (bulatkan ke bilangan bulat)?",a:20000*Math.pow(1.05,4),e:"20.000 × 1,05⁴ = 20.000 × 1,21550625 ≈ 24.310."},
+{t:"Peluruhan",q:"Mesin Rp80.000.000 menyusut 10% per tahun. Berapa nilainya setelah 3 tahun (rupiah)?",a:80e6*Math.pow(.9,3),e:"80.000.000 × 0,9³ = 80.000.000 × 0,729 = 58.320.000."},
+{t:"Waktu paruh",q:"Zat 640 gram, waktu paruh 2 jam. Berapa gram tersisa setelah 10 jam?",a:640*Math.pow(.5,5),e:"<span class='fr'><span>10</span><span>2</span></span> = 5 kali paruh. 640 × <span class='fr'><span>1</span><span>2</span></span><sup>5</sup> = <span class='fr'><span>640</span><span>32</span></span> = 20 gram."},
+{t:"Anuitas",q:"Pinjaman Rp10.000.000, bunga 10% per tahun, anuitas Rp2.000.000. Berapa angsuran pertama (rupiah)?",a:2e6-10e6*.1,e:"Bunga pertama = 10% × 10.000.000 = 1.000.000. Angsuran pertama = 2.000.000 − 1.000.000 = 1.000.000."},
+{t:"Anuitas",q:"Data soal sebelumnya (pinjaman 10 juta, 10%, anuitas 2 juta). Berapa sisa pinjaman setelah angsuran ke-2 (rupiah)?",a:10e6-1e6-1.1e6,e:"a₁ = 1.000.000, a₂ = 1.000.000 × 1,1 = 1.100.000. Sisa = 10.000.000 − 2.100.000 = 7.900.000."},
+{t:"Anuitas",q:"Hitung anuitas pinjaman Rp1.000.000, bunga 10% per tahun, lunas dalam 2 tahun (rupiah, bulatkan).",a:anu(1e6,.1,2),e:"A = <span class='fr'><span>1.000.000 × 0,1</span><span>1 − 1,1<sup>−2</sup></span></span> = <span class='fr'><span>100.000</span><span>0,173554</span></span> ≈ 576.190."},
+{t:"Anuitas",q:"Pinjaman Rp6.000.000, bunga 5% per periode, anuitas Rp1.800.000. Berapa bunga pada periode ke-2 (rupiah)?",a:.05*(6e6-(1.8e6-.05*6e6)),e:"Bunga 1 = 300.000, angsuran 1 = 1.500.000, sisa = 4.500.000. Bunga 2 = 5% × 4.500.000 = 225.000."},
+{t:"Gaya LKM: konversi bulan",q:"Pak Ahmad meminjam Rp8.000.000 dengan bunga tunggal 12% per tahun dan mengembalikannya setelah 8 bulan. Berapa total yang harus dibayar (rupiah)?",a:8e6+8e6*.12*8/12,e:"B = 8.000.000 × 0,12 × <span class='fr'><span>8</span><span>12</span></span> = 640.000. Total = 8.000.000 + 640.000 = 8.640.000."},
+{t:"Gaya LKM: mencari lama",q:"Rina menabung Rp4.000.000 dengan bunga tunggal 5% per tahun hingga menjadi Rp4.600.000. Berapa bulan lamanya?",a:36,e:"B = 4.600.000 − 4.000.000 = 600.000. Bunga per tahun = 4.000.000 × 0,05 = 200.000. Lama = <span class='fr'><span>600.000</span><span>200.000</span></span> = 3 tahun = 36 bulan."},
+{t:"Gaya LKM: mencari persen bunga",q:"Modal Rp10.000.000 berbunga tunggal Rp1.500.000 dalam 2 tahun. Berapa persen bunga per tahun? (contoh jawaban: 7,5)",a:7.5,e:"i = <span class='fr'><span>1.500.000</span><span>10.000.000 × 2</span></span> = 0,075 = 7,5%."},
+{t:"Gaya LKM: majemuk",q:"Siti mendepositokan Rp5.000.000 dengan bunga majemuk 10% per tahun. Berapa uangnya di akhir tahun ke-3 (rupiah)?",a:5e6*1.331,e:"M₃ = 5.000.000 × (1,1)³ = 5.000.000 × 1,331 = 6.655.000."},
+{t:"Gaya LKM: peluruhan",q:"Mobil seharga Rp200.000.000 menyusut 10% per tahun. Berapa harganya setelah 2 tahun (rupiah)?",a:200e6*.81,e:"P = 200.000.000 × (1 − 0,1)² = 200.000.000 × 0,81 = 162.000.000."},
+{t:"Gaya LKM: studi kasus",q:"Modal Rp20.000.000 selama 2 tahun. Bank A: bunga tunggal 8% per tahun. Bank B: bunga majemuk 7% per tahun. Berapa selisih modal akhir keduanya (rupiah)?",a:20e6*1.16-20e6*1.07*1.07,e:"Bank A: 20.000.000 × (1 + 0,08 × 2) = 23.200.000. Bank B: 20.000.000 × 1,07² = 22.898.000. Selisih = 302.000, jadi Bank A lebih menguntungkan."},
+{t:"Gaya LKM: anuitas",q:"Pinjaman Rp12.000.000, bunga 2% per bulan, anuitas Rp3.152.000. Berapa angsuran bulan ke-2 (rupiah)?",a:3152000-.02*(12e6-(3152000-240000)),e:"Bulan 1: bunga 240.000, angsuran 2.912.000, sisa 9.088.000. Bulan 2: bunga = 2% × 9.088.000 = 181.760, angsuran = 3.152.000 − 181.760 = 2.970.240."},
+{t:"Gaya LKM: anuitas",q:"Lanjutan soal sebelumnya: berapa angsuran bulan ke-3 (rupiah)?",a:3152000-.02*6117760,e:"Sisa bulan 2 = 9.088.000 − 2.970.240 = 6.117.760. Bunga bulan 3 = 2% × 6.117.760 = 122.355. Angsuran = 3.152.000 − 122.355 = 3.029.645."}];
+let done={};
+function renderQ(){done={};$("#qs").innerHTML=Q.map((x,i)=>`<div class="card"><span class="tag">Soal ${i+1} · ${x.t}</span><p>${x.q}</p>
+<div class="q"><input type="text" inputmode="decimal" id="in${i}" aria-label="Jawaban soal ${i+1}"><button class="btn" data-c="${i}">Cek</button><button class="btn g" data-p="${i}">Pembahasan</button></div>
+<div class="fb" id="fb${i}"></div><div id="ex${i}" class="mut" hidden>${x.e}</div></div>`).join("");sc()}
+function sc(){$("#score").textContent=`Skor: ${Object.values(done).filter(Boolean).length} dari ${Q.length} benar`}
+$("#qs").addEventListener("click",e=>{const c=e.target.dataset.c,p=e.target.dataset.p;
+ if(c!==undefined){const x=Q[c],raw=$("#in"+c).value.replace(/rp/gi,"").replace(/\s/g,"").replace(/\./g,"").replace(",","."),n=parseFloat(raw),f=$("#fb"+c);
+  if(isNaN(n)){f.className="fb no";f.textContent="Isi jawaban berupa angka dulu.";return}
+  const ok=Math.abs(n-x.a)<=Math.max(1,Math.abs(x.a)*.002);done[c]=ok;f.className="fb "+(ok?"ok":"no");
+  f.textContent=ok?"Benar!":"Belum tepat. Coba lagi atau buka pembahasan.";sc()}
+ if(p!==undefined){const d=$("#ex"+p);d.hidden=!d.hidden}});
+$("#reset").onclick=renderQ;
+
+const pn=s=>parseFloat(String(s).replace(/rp/gi,"").replace(/\s/g,"").replace(/\./g,"").replace(",","."));
+const TB=[
+{id:"tb1",h:["Tahun ke-","Modal awal (M<sub>0</sub>)","Bunga tahun ini (10%)","Total akhir (M<sub>n</sub>)"],r:[[1,"Rp 2.000.000","Rp 200.000","Rp 2.200.000"],[2,"Rp 2.000.000",{a:200000},{a:2400000}],[3,"Rp 2.000.000",{a:200000},{a:2600000}],[4,"Rp 2.000.000",{a:200000},{a:2800000}]]},
+{id:"tb2",h:["Tahun ke-","Modal awal periode (M<sub>0</sub>)","Bunga majemuk (10%)","Modal akhir periode (M<sub>n</sub>)"],r:[[1,"Rp 10.000.000","Rp 1.000.000","Rp 11.000.000"],[2,"Rp 11.000.000",{a:1100000},{a:12100000}],[3,{a:12100000},{a:1210000},{a:13310000}],[4,{a:13310000},{a:1331000},{a:14641000}]]},
+{id:"tb3",h:["Bulan (t)","Pinjaman awal (Rp)","Bunga 2% (B)","Angsuran (a)","Sisa pinjaman (H)"],r:[[1,"12.000.000","240.000","2.912.000","9.088.000"],[2,"9.088.000",{a:181760},{a:2970240},{a:6117760}],[3,{a:6117760},{a:122355},{a:3029645},{a:3088115}],[4,{a:3088115},{a:61762},{a:3090238},{a:0,tol:2500}]]}];
+function renderT(){TB.forEach(T=>{let h="<table><tr>"+T.h.map(x=>"<th>"+x+"</th>").join("")+"</tr>";
+ T.r.forEach(r=>{h+="<tr>"+r.map(c=>typeof c=="object"?`<td><input type="text" inputmode="decimal" size="11" data-a="${c.a}" data-t="${c.tol||2}" aria-label="isi sel"></td>`:"<td>"+c+"</td>").join("")+"</tr>"});
+ $("#"+T.id).innerHTML=h+`</table><div class="q"><button class="btn" data-ck="${T.id}">Cek tabel</button><button class="btn g" data-sh="${T.id}">Tampilkan jawaban</button></div><div class="fb" id="m${T.id}"></div>`})}
+document.addEventListener("click",e=>{const c=e.target.dataset.ck,s=e.target.dataset.sh,id=c||s;if(!id)return;
+ const ins=[...document.querySelectorAll("#"+id+" input")];let ok=0;
+ ins.forEach(i=>{if(s){i.value=Math.round(+i.dataset.a).toLocaleString("id-ID");i.style.borderColor="var(--ok)";return}
+  const n=pn(i.value),g=Math.abs(n-i.dataset.a)<=+i.dataset.t;ok+=g;i.style.borderColor=g?"var(--ok)":"var(--no)"});
+ if(c){const m=$("#m"+id);m.className="fb "+(ok==ins.length?"ok":"no");m.textContent=ok==ins.length?"Semua benar!":`${ok} dari ${ins.length} sel benar. Cek lagi yang berwarna merah.`}});
+renderT();
+["r1","r2","r3","r4"].forEach(f=>window[f]());renderQ();show(0);
+</script>
+</body>
+</html>
